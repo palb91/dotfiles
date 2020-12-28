@@ -6,3 +6,10 @@
 
 !git/
 !git/config
+
+!zsh/
+!zsh/.zshenv
+!zsh/.zprofile
+!zsh/.zshrc
+!zsh/config.d/
+!zsh/config.d/*
