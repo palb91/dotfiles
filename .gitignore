@@ -3,3 +3,6 @@
 !.gitignore
 !LICENSE
 !README.rst
+
+!git/
+!git/config

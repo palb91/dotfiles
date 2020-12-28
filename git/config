@@ -1,0 +1,22 @@
+## Git configuration
+
+
+[user]
+  name       = "Pierre-Albéric TROUPLIN"
+  email      = "palb-github@troupl.in"
+  signingkey = "palb-github@troupl.in"
+
+
+[http]
+  sslVerify  = true
+
+
+[github]
+  user       = "palb91"
+
+
+[alias]
+  s          = "status -u"
+  master     = "checkout master"
+  dev        = "checkout dev"
+  lg         = "log --graph --format='%C(bold 242)%<|(11)%h -%C(172)%d%C(reset) %s %C(243)(%cr) %C(69)<%an>%C(reset)'"
