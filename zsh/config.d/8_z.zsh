@@ -1,15 +1,12 @@
 ## ZSH zsh-z
 
 
-() {
-  local plugin_dir=/usr/share/zsh/plugins/zsh-z
-  local plugin="${plugin_dir}"/zsh-z.plugin.zsh
+plugin=/usr/share/zsh/plugins/zsh-z/zsh-z.plugin.zsh
 
-  [[ -f "${plugin}" ]] || return
-
+if [[ -f "${plugin}" ]]; then
   ZSHZ_CMD=t
   ZSHZ_DATA="${XDG_DATA_HOME}"/zsh/z.db
+  ZSHZ_CASE=smart
   [[ -d "${ZSHZ_DATA%/*}" ]] || mkdir -p "${ZSHZ_DATA%/*}"
-
   source "${plugin}"
-}
+fi

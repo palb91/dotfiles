@@ -1,25 +1,13 @@
 ## ZSH Completion
 
 
-
 # Init completion and set cache
+ZCOMPPATH="${XDG_CACHE_HOME}"/zsh
+[[ -d "${ZCOMPPATH}" ]] || mkdir -p -- "${ZCOMPPATH}"
 
-() {
-  local ZCOMPDUMP="${XDG_CACHE_HOME}"/zsh/zcompcache/zcompdump
-  mkdir -p -- "${ZCOMPDUMP%/*}"
-
-  autoload -Uz compinit
-  compinit -d "${ZCOMPDUMP}"
-
-  zstyle ':completion:*'          use-cache yes
-  zstyle ':completion:*:default'  cache-path "${ZCOMPDUMP%/*}"
-}
-
-
-# Set completion
-
-zmodload zsh/complist
-zstyle ':completion:*' menu select
+zstyle ':completion:*:default'          cache-path "${ZCOMPPATH}"/zcompcache
+zstyle ':completion:*'                  use-cache yes
+zstyle ':completion:*'                  menu select
 
 # Visual menu
 [[ -n "${LS_COLORS}" ]] \
@@ -68,5 +56,8 @@ zstyle ':completion:*:manuals'          separate-sections true
 zstyle ':completion:*:manuals.*'        insert-sections   true
 
 
-# Enable bash completion compatibility
-autoload -Uz bashcompinit && bashcompinit
+# Enable completion
+zmodload zsh/complist
+autoload -U compinit     && compinit -d "${ZCOMPPATH}"/zcompdump
+autoload -U bashcompinit && bashcompinit
+unset ZCOMPPATH

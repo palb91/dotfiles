@@ -23,9 +23,11 @@ Dotfiles
    * - ``zsh``
      - **files:**
 
-       - ``$XDG_CONFIG_HOME/zsh/.zshenv``
-       - ``$XDG_CONFIG_HOME/zsh/.zprofile``
-       - ``$XDG_CONFIG_HOME/zsh/.zshrc``
-       - ``$XDG_CONFIG_HOME/zsh/config.d/*``
-       - ``$XDG_DATA_HOME/zsh/*`` *(Per-machine configuration)*
-     - ``/etc/zshenv``: append ``export ZDOTDIR="${HOME}"/.config/zsh``
+         - ``$XDG_CONFIG_HOME/zsh/.zshenv``
+         - ``$XDG_CONFIG_HOME/zsh/.zprofile``
+         - ``$XDG_CONFIG_HOME/zsh/.zshrc``
+         - ``$XDG_CONFIG_HOME/zsh/config.d/*``
+         - ``$XDG_DATA_HOME/zsh/*`` *(Per-machine configuration)*
+       ``/etc/zshenv``: append ``export ZDOTDIR="${HOME}"/.config/zsh``
+
+       **plugin**: https://github.com/agkozak/zsh-z (jump to directories)

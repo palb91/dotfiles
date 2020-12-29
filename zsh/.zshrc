@@ -15,7 +15,6 @@ setopt AUTO_CD              # `cd cmd` if cmd is a dir AND not a command
 setopt AUTO_PUSHD           # cd push OLDPWD onto the dir stack
 
 # Completion
-setopt COMPLETE_ALIASES     # Smarter completion for aliases
 setopt COMPLETE_IN_WORD     # Complete from both ends of cursor
 setopt GLOB_COMPLETE        # Complete instead of insert glob expansion
 setopt HASH_LIST_ALL        # Hash PATH before first completion
