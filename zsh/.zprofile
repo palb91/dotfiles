@@ -15,6 +15,5 @@
 
 
 # Sway on tty1
-[[ -v WAYLAND_DISPLAY ]] && [[ "${XDG_VTNR}" -eq 1 ]] \
-    && exec "${XDG_CONFIG_HOME}"/sway/bin/sway        \
-    || exec sway
+[[ ! -v WAYLAND_DISPLAY ]] && [[ ! -v DISPLAY ]] && [[ "${XDG_VTNR}" -eq 1 ]] \
+    && exec sway
