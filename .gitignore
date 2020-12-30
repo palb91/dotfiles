@@ -10,6 +10,15 @@
 !tmux/
 !tmux/tmux.conf
 
+!vim/
+!vim/vimrc
+!vim/plugin/
+!vim/plugin/*
+!vim/colors/
+!vim/colors/*
+!vim/ftplugin/
+!vim/ftplugin/*
+
 !zsh/
 !zsh/.zshenv
 !zsh/.zprofile

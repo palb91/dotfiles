@@ -1,0 +1,70 @@
+"" Vim configuration
+
+
+" XDG standards
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
+
+set packpath^=$XDG_DATA_HOME/vim
+set packpath+=$XDG_DATA_HOME/vim/after
+
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+let g:netrw_home=$XDG_CACHE_HOME . "/vim/netrwhist"
+
+
+" Options
+set autoindent smartindent            " Keep indent on new lines
+set expandtab sts=4 sw=4              " Default indentation 4 spaces
+set shiftround                        " Indent are multiples of tabstop
+set breakindent                       " Wrapped line will be indented
+
+set undofile                          " Save undo
+set nostartofline                     " Keep cursor column (gg, G, M, L, H…)
+set lazyredraw                        " Don't refresh screen while macro
+set splitbelow splitright             " Change splitting direction
+set nojoinspaces                      " Insert only 1 space on join (J)
+set mouse=                            " Disable mouse
+
+set hlsearch                          " Always highlight search results
+set ignorecase smartcase              " Smart search
+
+set number                            " Show line numbers
+set cursorline cursorlineopt=both     " Show current line number
+set scrolloff=10                      " Visible lines when scrolling
+set colorcolumn=80                    " Line max width
+set linebreak                         " Don't wrap in a middle of a word
+
+set list
+set listchars=tab:┄┄⇒,nbsp:_,trail:·  " Print invisible characters
+set listchars+=extends:→,precedes:←
+set showbreak=…                       " Prepend wrapped lines with '… '
+set fillchars=vert:│,fold:─           " Split characters
+set noshowmode                        " Don't show current mode
+set laststatus=2                      " Show statusline
+
+set completeopt=menuone               " Completion options
+
+set wildmenu                          " Enable completion menu
+set wildcharm=<Tab>                   " Use <Tab> in macro and remaps
+set wildignorecase                    " Case insensitive completion
+
+set path=.,**                         " Append all subdirs to path
+
+let &t_SI = "\e[6 q"                  " Cursor shape (insert mode)
+let &t_SR = "\e[4 q"                  " Cursor shape (replace mode)
+let &t_EI = "\e[2 q"                  " Cursor shape (normal mode)
+
+colorscheme nighty                    " Colorscheme
+
+set statusline=%*
+set statusline+=%2* %{&readonly?' ':''}
+set statusline+=%1*%f
+set statusline+=%2*%{&modified?'*':''} 
+set statusline+=%*%-7( [%{&ft!=#''?&ft:'×'}] %)
+set statusline+=%=
+set statusline+=%(l.%l c.%c%V%)
+set statusline+= \| %3P
+
+
+" Load default vimrc
+runtime! defaults.vim
