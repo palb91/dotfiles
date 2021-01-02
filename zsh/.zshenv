@@ -13,10 +13,11 @@ export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR}/tmux"
 
 
-# gnupg/pass
+# Tools variables
 export GPG_TTY="${GPG_TTY:-$(tty)}"
 export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
+export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
 
 
 # PATH

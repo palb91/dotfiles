@@ -2,7 +2,12 @@
 
 
 " XDG standards
+if empty($XDG_CACHE_HOME)  |let $XDG_CACHE_HOME = $HOME."/.cache"       |endif
+if empty($XDG_CONFIG_HOME) |let $XDG_ONFIG_HOME = $HOME."/.config"      |endif
+if empty($XDG_DATA_HOME)   |let $XDG_DATA_HOME  = $HOME."/.local/share" |endif
+
 set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
 set runtimepath+=$XDG_CONFIG_HOME/vim/after
 
 set packpath^=$XDG_DATA_HOME/vim
@@ -10,6 +15,8 @@ set packpath+=$XDG_DATA_HOME/vim/after
 
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 let g:netrw_home=$XDG_CACHE_HOME . "/vim/netrwhist"
+
+call mkdir($XDG_DATA_HOME . "vim/spell", 'p', 0700)
 
 
 " Options

@@ -21,11 +21,10 @@ Dotfiles
      - **file:** ``$XDG_CONFIG_HOME/tmux/tmux.conf``
 
    * - ``vim``
-     - :files:     - ``$XDG_CONFIG_HOME/vim/vimrc``
-                   - ``$XDG_CONFIG_HOME/vim/plugin/*``
-                   - ``$XDG_CONFIG_HOME/vim/ftplugin/*``
-                   - ``$XDG_DATA_HOME/vim`` (``packpath``)
-       :``zshrc``: append ``export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc``
+     - :files: - ``$XDG_CONFIG_HOME/vim/vimrc``
+               - ``$XDG_CONFIG_HOME/vim/plugin/*``
+               - ``$XDG_CONFIG_HOME/vim/ftplugin/*``
+               - ``$XDG_DATA_HOME/vim`` (``packpath``)
 
    * - ``zsh``
      - :files:           - ``$XDG_CONFIG_HOME/zsh/.zshenv``

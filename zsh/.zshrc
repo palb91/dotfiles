@@ -85,7 +85,6 @@ KEYTIMEOUT=10
 export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --ignore-case --tabs=4'
 export LESSHISTFILE=-
 export MAKEFLAGS=-j2
-export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
 
 
 
