@@ -12,8 +12,8 @@
 
 !vim/
 !vim/vimrc
-!vim/plugin/
-!vim/plugin/*
+!vim/vimrc.d/
+!vim/vimrc.d/*
 !vim/colors/
 !vim/colors/*
 !vim/ftplugin/

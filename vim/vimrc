@@ -73,5 +73,6 @@ set statusline+=%(l.%l c.%c%V%)
 set statusline+= \| %3P
 
 
-" Load default vimrc
+" Load default and custom vim files
 runtime! defaults.vim
+runtime! vimrc.d/*.vim

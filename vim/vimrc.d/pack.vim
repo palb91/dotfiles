@@ -23,8 +23,8 @@ let g:fauxClip_paste_cmd         = 'wl-paste --no-newline'
 packadd fauxClip
 
 
-" Surrounding helper
 MinPlug machakann/vim-sandwich
+" Surrounding helper
 
 
 " Alignment helper
@@ -41,11 +41,3 @@ MinPlug tyjak/vim-redact-pass
 
 " Better % handling (jump)
 packadd! matchit
-
-
-" TODO: Fix (packadd should not be necessary with MinPlug)
-packadd VimCompletesMe
-packadd vim-sandwich
-packadd vim-lion
-packadd vim-cool
-packadd vim-redact-pass
