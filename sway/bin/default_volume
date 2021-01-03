@@ -1,0 +1,11 @@
+#!/bin/sh
+
+pactl list sinks short \
+  | while read SINK; do
+      SINK="$(echo "${SINK}" | awk '{ printf $2 }')"
+
+      case "${SINK}" in
+        *AmazonBasics*) pactl set-sink-volume "${SINK}" 31% ;;
+                     *) pactl set-sink-volume "${SINK}" 20% ;;
+      esac
+  done

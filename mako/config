@@ -1,0 +1,20 @@
+## Mako configuration
+
+
+font=Terminus,FontAwesome 11
+background-color=#333333BB
+text-color=#FFFFFF
+margin=2
+padding=5
+border-size=0
+progress-color=#444444BB
+icon-location=right
+format=<b><u>%s</u> |</b> %b
+default-timeout=5000
+layer=overlay
+anchor=center
+group-by=summary
+
+
+[grouped]
+format=<b><u>%s</u> |</b> %b

@@ -1,0 +1,23 @@
+## Sway configuration
+
+
+# Options
+
+default_border              pixel 2
+default_floating_border     pixel 2
+titlebar_padding            2
+hide_edge_borders --i3      both
+smart_borders               on
+xwayland                    enable
+focus_on_window_activation  smart
+focus_follows_mouse         no
+focus_wrapping              no
+
+
+# Load system configuration
+include /etc/sway/config.d/50-systemd-user.conf
+
+
+# Load configuration files
+set $bin ${XDG_CONFIG_HOME}/sway/bin
+include /home/palb/.config/sway/config.d/*

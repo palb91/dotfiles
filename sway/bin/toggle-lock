@@ -1,0 +1,12 @@
+#!/bin/sh
+
+PID_FILE="${XDG_RUNTIME_DIR}"/lock_inhibit.pid
+
+if [[ -f "${PID_FILE}" ]]; then
+  kill $( <"${PID_FILE}" )
+  rm "${PID_FILE}"
+  exit 0
+fi
+
+echo "$$" > "${PID_FILE}"
+exec systemd-inhibit --what=idle sleep infinity

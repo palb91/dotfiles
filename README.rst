@@ -14,11 +14,31 @@ Dotfiles
    * - Tool
      - Notes
 
+   * - ``foot``
+     - **file:** ``$XDG_CONFIG_HOME/foot/foot.ini``
+
    * - ``git``
      - **file:** ``$XDG_CONFIG_HOME/git/config``
 
+   * - ``kanshi``
+     - **file:** ``$XDG_CONFIG_HOME/kanshi/config``
+
+   * - ``mako``
+     - **file:** ``$XDG_CONFIG_HOME/mako/config``
+
    * - ``tmux``
      - **file:** ``$XDG_CONFIG_HOME/tmux/tmux.conf``
+
+   * - ``sway``
+     - :files: - ``$XDG_CONFIG_HOME/sway/config``
+               - ``$XDG_CONFIG_HOME/sway/config.d/*``
+               - ``$XDG_CONFIG_HOME/sway/bin/*``
+
+   * - ``swayidle``
+     - **file:** ``$XDG_CONFIG_HOME/swayidle/config``
+
+   * - ``swaylock``
+     - **file:** ``$XDG_CONFIG_HOME/swaylock/config``
 
    * - ``vim``
      - :files: - ``$XDG_CONFIG_HOME/vim/vimrc``

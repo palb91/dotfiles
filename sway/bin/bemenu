@@ -1,0 +1,21 @@
+#!/bin/sh
+
+export BEMENU_OPTS
+BEMENU_OPTS+='--ignorecase '
+BEMENU_OPTS+='--list=10 '
+BEMENU_OPTS+='--wrap '
+BEMENU_OPTS+='--prompt=menu: '
+BEMENU_OPTS+='--prefix=→ '
+BEMENU_OPTS+='--no-overlap '
+
+BEMENU_OPTS+="--fn 'Terminus,FontAwesome 11' "  # Font
+BEMENU_OPTS+='--tb=#111111 --tf=#FFFFFF '       # Title
+BEMENU_OPTS+='--fb=#111111 --ff=#0077FF '       # Filter
+BEMENU_OPTS+='--nb=#111111 --nf=#CCBBAA '       # Normal
+BEMENU_OPTS+='--hb=#333333 --hf=#CCBBAA '       # Highlight
+BEMENU_OPTS+='--sb=#001122 --sf=#0077FF '       # Selection
+
+[[ "${0##*/}" = 'bemenu-run' ]] \
+  && BEMENU_OPTS+='--prompt=run: '
+
+exec /usr/bin/${0##*/} "${@}"

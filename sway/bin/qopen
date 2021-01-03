@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd "${HOME}"/tmp
+FILE="$( find -type f -maxdepth 1 | sed 's/^\.\///' | bemenu -l 40 )"
+
+[[ -z "${FILE}" ]] && return
+
+command rifle "${FILE}"

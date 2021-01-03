@@ -4,8 +4,30 @@
 !LICENSE
 !README.rst
 
+!foot/
+!foot/foot.ini
+
 !git/
 !git/config
+
+!kanshi/
+!kanshi/config
+
+!mako/
+!mako/config
+
+!sway/
+!sway/config
+!sway/config.d/
+!sway/config.d/*
+!sway/bin/
+!sway/bin/*
+
+!swayidle/
+!swayidle/config
+
+!swaylock/
+!swaylock/config
 
 !tmux/
 !tmux/tmux.conf

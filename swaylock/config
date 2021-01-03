@@ -1,0 +1,41 @@
+## Swaylock configuration
+
+
+# Options
+daemonize
+ignore-empty-password
+
+
+# Disabled text
+hide-keyboard-layout
+disable-caps-lock-text
+
+
+# Ring
+indicator-idle-visible
+indicator-radius=150
+indicator-thickness=20
+line-uses-inside
+
+color=000000
+
+key-hl-color=777777
+bs-hl-color=000000
+
+ring-color=222222
+ring-clear-color=222222
+ring-ver-color=222222
+ring-wrong-color=222222
+
+separator-color=222222
+
+inside-color=000000
+inside-clear-color=333333
+inside-ver-color=111111
+inside-wrong-color=220000
+
+layout-text-color=000000
+text-color=000000
+text-clear-color=333333
+text-ver-color=111111
+text-wrong-color=220000
