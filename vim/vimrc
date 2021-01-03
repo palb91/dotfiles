@@ -16,7 +16,7 @@ set packpath+=$XDG_DATA_HOME/vim/after
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 let g:netrw_home=$XDG_CACHE_HOME . "/vim/netrwhist"
 
-call mkdir($XDG_DATA_HOME . "vim/spell", 'p', 0700)
+call mkdir($XDG_DATA_HOME . "/vim/spell", 'p', 0700)
 
 
 " Options
