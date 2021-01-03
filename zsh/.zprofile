@@ -14,6 +14,18 @@
 #    DBUS_SESSION_BUS_ADDRESS
 
 
+sway() {
+    export QT_QPA_PLATFORM=wayland
+    export QT_QPA_PLATFORMTHEME=qt5ct
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+    export QT_WAYLAND_FORCE_DPI=92
+    export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=${XDG_DATA_HOME}"
+    export path=( "${XDG_CONFIG_HOME}"/sway/bin "${path[@]}" )
+
+    exec command sway
+}
+
 # Sway on tty1
-[[ ! -v WAYLAND_DISPLAY ]] && [[ ! -v DISPLAY ]] && [[ "${XDG_VTNR}" -eq 1 ]] \
-    && exec sway
+if [[ ! -v WAYLAND_DISPLAY ]] && [[ ! -v DISPLAY ]]; then   # Sway or X running
+    [[ "${XDG_VTNR}" -eq 1 ]] && sway                       # tty1
+fi
