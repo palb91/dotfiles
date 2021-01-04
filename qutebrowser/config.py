@@ -45,6 +45,7 @@ c.hints.scatter                     = False
 c.hints.selectors["frame"]          = ['div', 'header', 'section', 'nav']
 # Input........................................................................
 c.input.forward_unbound_keys        = 'none'
+c.input.partial_timeout             = 10000
 # Messages.....................................................................
 c.messages.timeout                  = 4000
 # Tabs.........................................................................
@@ -158,10 +159,16 @@ c.colors.webpage.darkmode.enabled               = True
 
 
 # Bindings
-#c.bindings.default  = {}
-#c.bindings.commands = {
-#
-#}
+c.bindings.default  = {}
+with open('.config/qutebrowser/keys.cfg', 'r') as keyfile:
+    for line in keyfile.read().split("\n"):
+        stripped = line.lstrip()
+        if len(stripped) == 0:
+            continue
+        if line[0] != ' ':
+            mode = stripped
+        else:
+            config.bind(*line.split(maxsplit=1), mode=mode)
 
 # URL Settings
 # with url.pattern('*teams*'):

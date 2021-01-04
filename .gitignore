@@ -18,6 +18,7 @@
 
 !qutebrowser/
 !qutebrowser/config.py
+!qutebrowser/keys.cfg
 
 !sway/
 !sway/config
