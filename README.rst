@@ -53,6 +53,10 @@ Dotfiles
                - ``$XDG_CONFIG_HOME/vim/ftplugin/*``
                - ``$XDG_DATA_HOME/vim`` (``packpath``)
 
+   * - ``xdg``
+     - :files: - ``$XDG_CONFIG_HOME/user-dirs.dirs``
+                 ``$XDG_CONFIG_HOME/user-dirs.locale``
+
    * - ``zsh``
      - :files:           - ``$XDG_CONFIG_HOME/zsh/.zshenv``
                          - ``$XDG_CONFIG_HOME/zsh/.zprofile``

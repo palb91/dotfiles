@@ -38,6 +38,9 @@
 !tmux/
 !tmux/tmux.conf
 
+!user-dirs.dirs
+!user-dirs.locale
+
 !vim/
 !vim/vimrc
 !vim/vimrc.d/
