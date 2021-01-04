@@ -26,6 +26,9 @@ Dotfiles
    * - ``mako``
      - **file:** ``$XDG_CONFIG_HOME/mako/config``
 
+   * - ``qutebrowser``
+     - **file:** ``$XDG_CONFIG_HOME/qutebrowser/config.py``
+
    * - ``tmux``
      - **file:** ``$XDG_CONFIG_HOME/tmux/tmux.conf``
 

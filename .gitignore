@@ -16,6 +16,9 @@
 !mako/
 !mako/config
 
+!qutebrowser/
+!qutebrowser/config.py
+
 !sway/
 !sway/config
 !sway/config.d/
