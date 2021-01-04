@@ -2,7 +2,7 @@
 
 
 profile nomad {
-  output eDP-1 enable scale 2
+  output eDP-1 enable
 }
 
 
@@ -12,7 +12,7 @@ profile home {
 
 
 profile home {
-  output eDP-1 position 0,0 scale 1
+  output eDP-1 position 0,0
   output "Ancor Communications Inc VN279 F1LMQS043938" enable position 1920,0
 }
 
@@ -24,5 +24,5 @@ profile work {
 
 profile work {
   output "Dell Inc. DELL P2417H CW6Y77BK65RS" position 0,0
-  output eDP-1 enable position 1921,0 scale 1
+  output eDP-1 enable position 1921,0
 }
