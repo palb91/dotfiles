@@ -16,6 +16,8 @@
 !mako/
 !mako/config
 
+!ncpamixer.conf
+
 !qutebrowser/
 !qutebrowser/config.py
 !qutebrowser/keys.cfg

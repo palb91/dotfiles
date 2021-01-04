@@ -26,6 +26,9 @@ Dotfiles
    * - ``mako``
      - **file:** ``$XDG_CONFIG_HOME/mako/config``
 
+   * - ``ncpamixer``
+     - **file:** ``$XDG_CONFIG_HOME/ncpamixer.conf``
+
    * - ``qutebrowser``
      - :file: - ``$XDG_CONFIG_HOME/qutebrowser/config.py``
               - ``${XDG_CONFIG_HOME/qutebrowser/keys.cfg``
