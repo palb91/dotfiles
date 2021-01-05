@@ -57,6 +57,9 @@ Dotfiles
      - :files: - ``$XDG_CONFIG_HOME/user-dirs.dirs``
                  ``$XDG_CONFIG_HOME/user-dirs.locale``
 
+   * - ``zathura``
+     - **file:** ``$XDG_CONFIG_HOME/zathura/zathurarc``
+
    * - ``zsh``
      - :files:           - ``$XDG_CONFIG_HOME/zsh/.zshenv``
                          - ``$XDG_CONFIG_HOME/zsh/.zprofile``

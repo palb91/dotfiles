@@ -50,6 +50,9 @@
 !vim/ftplugin/
 !vim/ftplugin/*
 
+!zathura/
+!zathura/zathurarc
+
 !zsh/
 !zsh/.zshenv
 !zsh/.zprofile

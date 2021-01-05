@@ -1,0 +1,29 @@
+# ZATHURA Configuration
+
+
+set default-bg              "#333333"
+set default-fg              "#CCBBAA"
+
+set completion-bg           "#000000"
+set completion-fg           "#777777"
+set completion-group-bg     "#000000"
+set completion-group-fg     "#FFFFFF"
+set completion-highlight-bg "#000000"
+set completion-highlight-fg "#FFAA00"
+set inputbar-bg             "#000000"
+set inputbar-fg             "#FFAA00"
+set notification-bg         "#000000"
+set notification-fg         "#AAFF00"
+set notification-warning-bg "#000000"
+set notification-warning-fg "#FFAA00"
+set notification-error-bg   "#000000"
+set notification-error-fg   "#FF3333"
+set statusbar-bg            "#000000"
+set statusbar-fg            "#AAAAAA"
+set highlight-color         "#FFAA00"
+set highlight-active-color  "#33AA00"
+
+set font                    "Terminus 11"
+set guioptions              "s"
+set statusbar-home-tilde    "true"
+set selection-clipboard     "clipboard"
