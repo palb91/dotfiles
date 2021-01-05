@@ -14,6 +14,10 @@ Dotfiles
    * - Tool
      - Notes
 
+   * - ``davmail``
+     - :file: - ``$XDG_CONFIG_HOME/davmail/config``
+       :url:  - Replace ``davmail.url`` with corporate url.
+
    * - ``foot``
      - **file:** ``$XDG_CONFIG_HOME/foot/foot.ini``
 
