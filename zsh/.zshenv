@@ -15,7 +15,7 @@ export TMUX_TMPDIR="${XDG_RUNTIME_DIR}/tmux"
 
 # Tools variables
 export GPG_TTY="${GPG_TTY:-$(tty)}"
-export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
 export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
 
