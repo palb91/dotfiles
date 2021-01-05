@@ -7,6 +7,7 @@ BEMENU_OPTS+='--wrap '
 BEMENU_OPTS+='--prompt=menu: '
 BEMENU_OPTS+='--prefix=→ '
 BEMENU_OPTS+='--no-overlap '
+BEMENU_OPTS+='--monitor=all '
 
 BEMENU_OPTS+="--fn 'Terminus,FontAwesome 11' "  # Font
 BEMENU_OPTS+='--tb=#111111 --tf=#FFFFFF '       # Title
