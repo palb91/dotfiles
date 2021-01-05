@@ -1,12 +1,31 @@
 #!/bin/sh
 
 PID_FILE="${XDG_RUNTIME_DIR}"/lock_inhibit.pid
+PID="${$}"
 
-if [[ -f "${PID_FILE}" ]]; then
-  kill $( <"${PID_FILE}" )
-  rm "${PID_FILE}"
-  exit 0
-fi
 
-echo "$$" > "${PID_FILE}"
-exec systemd-inhibit --what=idle sleep infinity
+set_inhibitor() {
+    echo "${PID}" > "${PID_FILE}"
+    exec systemd-inhibit --what=idle sleep infinity
+    return
+}
+
+
+remove_inhibitor() {
+    kill $( <"${PID_FILE}" )
+    rm "${PID_FILE}"
+    return
+}
+
+
+toggle_inhibitor() {
+    [[ -f "${PID_FILE}" ]]  \
+        && remove_inhibitor \
+        || set_inhibitor
+    exit 0
+}
+
+
+[ "${#}" -eq 0 ]    && toggle_inhibitor
+
+[ "${1}" = 'lock' ] && remove_inhibitor && loginctl lock-session
