@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[[ "${#}" -eq 0 ]] && set -- tmux
+
+# Start server if required
+if ! pgrep -a foot | grep -q 'foot \(-s\|--server\)'; then
+    foot --server &
+    sleep 0.5
+fi
+
+exec footclient "${@}"
