@@ -16,8 +16,8 @@ MinPlug! dhruvasagar/vim-table-mode
 
 " Clipboard for vim -clipboard
 MinPlug! Jorengarenar/fauxClip
-let g:fauxClip_copy_primary_cmd  = 'wl-copy'
-let g:fauxClip_paste_primary_cmd = 'wl-paste --no-newline'
+let g:fauxClip_copy_primary_cmd  = 'wl-copy --primary'
+let g:fauxClip_paste_primary_cmd = 'wl-paste --primary --no-newline'
 let g:fauxClip_copy_cmd          = 'wl-copy'
 let g:fauxClip_paste_cmd         = 'wl-paste --no-newline'
 packadd fauxClip
