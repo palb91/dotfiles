@@ -62,9 +62,6 @@ setopt BEEP                 # Disable beep for zle widgets
 
 # -- Parameters
 
-EDITOR=vim
-PAGER=less
-VISUAL="${EDITOR}"
 READNULLCMD="${PAGER}"
 
 LANG=en_US.UTF-8
@@ -80,8 +77,11 @@ KEYTIMEOUT=10
 
 
 
-# -- Shell utilities environment variables
+# -- Shell utilities
 
+export EDITOR=vim
+export PAGER=less
+export VISUAL="${EDITOR}"
 export LESS='--RAW-CONTROL-CHARS --LONG-PROMPT --ignore-case --tabs=4'
 export LESSHISTFILE=-
 export MAKEFLAGS=-j2

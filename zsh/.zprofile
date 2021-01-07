@@ -20,6 +20,7 @@ sway() {
     export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     export QT_WAYLAND_FORCE_DPI=92
     export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=${XDG_DATA_HOME}"
+    export _JAVA_AWT_WM_NONREPARENTING=1
     export path=( "${XDG_CONFIG_HOME}"/sway/bin "${path[@]}" )
 
     exec command sway

@@ -20,6 +20,14 @@ export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
 export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
 
 
+# export to systemd
+systemctl --user import-environment \
+    GPG_TTY                         \
+    GNUPGHOME                       \
+    SSH_AUTH_SOCK                   \
+    PASSWORD_STORE_DIR
+
+
 # PATH
 declare -Ux path PATH
 path=( "${HOME}/.local/bin" "${path[@]}" )
