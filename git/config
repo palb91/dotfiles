@@ -20,3 +20,6 @@
   master     = "checkout master"
   dev        = "checkout dev"
   lg         = "log --graph --format='%C(bold 242)%<|(11)%h -%C(172)%d%C(reset) %s %C(243)(%cr) %C(69)<%an>%C(reset)'"
+
+[pull]
+  rebase = false
