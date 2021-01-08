@@ -41,6 +41,15 @@
 !swaylock/
 !swaylock/config
 
+!systemd/
+!systemd/user/
+!systemd/user/davmail.service
+!systemd/user/ssh-agent.service
+!systemd/user/fetchmail.service
+!systemd/user/fetchmail.timer
+!systemd/bin/
+!systemd/bin/fetchmail
+
 !tmux/
 !tmux/tmux.conf
 

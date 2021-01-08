@@ -55,6 +55,10 @@ Dotfiles
    * - ``swaylock``
      - **file:** ``$XDG_CONFIG_HOME/swaylock/config``
 
+   * - ``systemd``
+     - :files: - ``$XDG_CONFIG_HOME/systemd/bin/*`` (scripts related to systemd only)
+               - ``$XDG_CONFIG_HOME/systemd/user/*`` (services and timers)
+
    * - ``vim``
      - :files: - ``$XDG_CONFIG_HOME/vim/vimrc``
                - ``$XDG_CONFIG_HOME/vim/plugin/*``
