@@ -62,9 +62,9 @@ cpu_temperature 0 {
 }
 
 cpu_usage {
-  format                          = ' %usage'
-  format_above_degraded_threshold = '#FFAA00  %usage'
-  format_above_threshold          = '#FF0000  %usage'
+  format                          = ''
+  format_above_degraded_threshold = '#FFAA00 '
+  format_above_threshold          = '#FF0000 '
   degraded_threshold              = 60
   max_threshold                   = 80
 }
@@ -74,7 +74,7 @@ battery all {
   integer_battery_capacity        = true
   status_chr                      = ''
   status_bat                      = ''
-  status_full                     = ''
+  #status_full                    = ''
   status_unk                      = '?'
   threshold_type                  = 'percentage'
   low_threshold                   = 20
