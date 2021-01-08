@@ -15,8 +15,9 @@ Dotfiles
      - Notes
 
    * - ``davmail``
-     - The configuration is in ``$XDG_CONFIG_HOME/davmail/config``. Run
-       ``systemctl --user enable --now davmail``. (Edit ``davmail.url``).
+     - - The configuration is in ``$XDG_CONFIG_HOME/davmail/config``.
+       - Edit ``davmail.url`` in configuration.
+       - Run ``systemctl --user enable --now davmail``.
 
    * - ``foot``
      -
@@ -46,9 +47,7 @@ Dotfiles
      -
 
    * - ``sway``
-     - :files: - ``$XDG_CONFIG_HOME/sway/config``
-               - ``$XDG_CONFIG_HOME/sway/config.d/*``
-               - ``$XDG_CONFIG_HOME/sway/bin/*``
+     -
 
    * - ``swayidle``
      -
@@ -65,7 +64,9 @@ Dotfiles
        - ``vim +MinPlugInstall +q``
 
    * - ``xdg``
-     -
+     - :files: - ``$XDG_CONFIG_HOME/user-dirs.dirs``
+               - ``$XDG_CONFIG_HOME/user-dirs.locale``
+               - ``$XDG_CONFIG_HOME/mimeapps.list``
 
    * - ``zathura``
      -
