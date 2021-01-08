@@ -24,6 +24,9 @@
 
 !ncpamixer.conf
 
+!ncspot/
+!ncspot/config.toml
+
 !qutebrowser/
 !qutebrowser/config.py
 !qutebrowser/keys.cfg
