@@ -11,8 +11,6 @@ general {
 order += 'run_watch inhibit_idle'
 order += 'volume laptop'
 order += 'volume headset'
-# #order += 'xxx vpn'
-# #order += 'xxx belux'
 order += 'ethernet _first_'
 order += 'wireless _first_'
 order += 'disk /'

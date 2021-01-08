@@ -29,6 +29,7 @@ init() {
     printf '%s' "${pid}" > "${pidfile}"
 
     trap "cleanup" EXIT HUP INT QUIT
+    status_update
 }
 
 

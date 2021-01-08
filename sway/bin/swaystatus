@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
+"""i3status wrapper."""
+
 import os
 import sys
 import json
+import psutil
 import notmuch
 
 
@@ -39,13 +42,30 @@ def cpu_usage(bloc):       return bloc
 
 def mails(bloc):
     """Get the count with notmuch."""
+    def is_fetchmail_running():
+        pid_file = os.environ['XDG_RUNTIME_DIR'] + '/fetchmail.pid'
+        with open(pid_file, 'r') as pid:
+            fetchmail_pid = int(pid.readline().strip())
+            for p in psutil.process_iter():
+                if p.pid == fetchmail_pid and p.name() == 'fetchmail':
+                    return True
+                    break
+        return False
+
     db_base  = os.environ['XDG_DATA_HOME'] + '/mails/%s'
     query    = 'tag:inbox AND tag:unread AND NOT tag:killed'
     color    = {'work': '#7777FF', 'home': '#77BB77'}
     out      = ''
-    icon     = {True: '#FFFFFF  ', False: '#333333  '}
+    icon     = ''
     style    = {'home': str.maketrans('0123456789', '⁰¹²³⁴⁵⁶⁷⁸⁹'),
                 'work': str.maketrans('0123456789', '₀₁₂₃₄₅₆₇₈₉')}
+
+    # Show if fetching mails
+    try:
+        if is_fetchmail_running():
+            icon = ' '
+    except FileNotFoundError:
+        pass
 
     for account in ['work', 'home']:
         db_dir = db_base % account
@@ -62,7 +82,10 @@ def mails(bloc):
 
         out+='<span color="%s">%s</span>' % (color[account], count)
 
-    bloc['full_text'] = icon[out != ''] + out
+    if icon == '':
+        icon = '#FFFFFF  ' if out != '' else '#333333  '
+
+    bloc['full_text'] = icon + out
     return bloc
 
 
