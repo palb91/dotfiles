@@ -23,6 +23,15 @@ sway() {
     export _JAVA_AWT_WM_NONREPARENTING=1
     export path=( "${XDG_CONFIG_HOME}"/sway/bin "${path[@]}" )
 
+    systemctl --user import-environment     \
+        QT_QPA_PLATFORM                     \
+        QT_QPA_PLATFORMTHEME                \
+        QT_WAYLAND_DISABLE_WINDOWDECORATION \
+        QT_WAYLAND_FORCE_DPI                \
+        _JAVA_OPTIONS                       \
+        _JAVA_AWT_WM_NONREPARENTING         \
+        PATH
+
     exec command sway
 }
 

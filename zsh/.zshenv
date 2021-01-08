@@ -22,6 +22,9 @@ export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
 
 # export to systemd
 systemctl --user import-environment \
+    XDG_CONFIG_HOME                 \
+    XDG_DATA_HOME                   \
+    XDG_CACHE_HOME                  \
     GPG_TTY                         \
     GNUPGHOME                       \
     SSH_AUTH_SOCK                   \
