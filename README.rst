@@ -24,7 +24,7 @@ Dotfiles
    * - ``git``
      - **file:** ``$XDG_CONFIG_HOME/git/config``
 
-     - ``i3status``
+   * - ``i3status``
      - :file:    ``$XDG_CONFIG_HOME/i3status/config``
        :sway:    Run with a python wrapper: ``swaystatus``
 
@@ -67,7 +67,7 @@ Dotfiles
 
    * - ``xdg``
      - :files: - ``$XDG_CONFIG_HOME/user-dirs.dirs``
-                 ``$XDG_CONFIG_HOME/user-dirs.locale``
+               - ``$XDG_CONFIG_HOME/user-dirs.locale``
 
    * - ``zathura``
      - **file:** ``$XDG_CONFIG_HOME/zathura/zathurarc``
