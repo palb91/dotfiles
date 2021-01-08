@@ -9,7 +9,7 @@ padding=5
 border-size=0
 progress-color=#444444BB
 icon-location=right
-format=<b><u>%s</u> |</b> %b
+format= <b><u>%s</u> |</b> %b
 default-timeout=5000
 layer=overlay
 anchor=center
@@ -18,3 +18,9 @@ group-by=summary
 
 [grouped]
 format=<b><u>%s</u> |</b> %b
+
+
+[urgency=critical]
+background-color=#770000FF
+format= <b><u>%s</u> |</b> %b
+default-timeout=10000
