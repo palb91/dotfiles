@@ -20,8 +20,7 @@ fi
 # Start server if required
 if ! pgrep -a foot | grep -q 'foot \(-s\|--server\)'; then
     nohup foot --server >/dev/null 2>&1 &
-    notify-send 'foot' 'server started'
-    sleep 2
+    sleep 0.5
 fi
 
 exec footclient "${@}"
