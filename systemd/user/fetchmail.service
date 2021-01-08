@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync mails, calendars and contacts
+
+[Service]
+Type=oneshot
+ExecStart=%E/systemd/bin/fetchmail
+
+[Install]
+WantedBy=network-online.target
+WantedBy=default.target

@@ -1,0 +1,118 @@
+#!/bin/bash
+
+
+# Environment variables
+typeset -a err_msg count_msg accounts
+
+pidfile="${XDG_RUNTIME_DIR}"/fetchmail.pid
+pid="${$}"
+baseconf="${XDG_CONFIG_HOME}"/notmuch
+accounts=( work home )
+count_msg=( "New mails:" )
+
+
+# Utils
+status_update() { pkill -U "${USER}" -SIGUSR1 i3status;      }  # Update WM bar
+notify()        { notify-send "" "${@}";                    }  # Message
+log()           { printf '\n[ %s ] %s\n' "${1}" "${2}";      }  # Text output
+cleanup()       { rm -f "${pidfile}"; status_update; exit 0; }  # Clean exit
+notify_err()    { notify -u critical "${@}";                 }  # On error
+
+
+# Prevent concurrent executions, setup clean exit
+init() {
+    local proc_cmd
+    if [[ -f "${pidfile}" ]]; then
+        proc_cmd="$(ps -p "$(<"${pidfile}")" -o comm= --no-heading)"
+        [[ "${proc_cmd}" = "${0##*/}" ]] && exit
+    fi
+    printf '%s' "${pid}" > "${pidfile}"
+
+    trap "cleanup" EXIT HUP INT QUIT
+}
+
+
+# Fetch mails and tag them automatically
+fetch_mails() {
+    local count
+    log 'mbsync' "Fetch ${1@U} mails"
+    mbsync --config <(pass config/mbsync) "${1}" || {
+        err_msg+=("mbsync: cannot sync ${1@U}...")
+        return 1
+    }
+}
+
+
+# Add "new" tag and setup notification message
+add_new_tag() {
+    log 'notmuch' "Tag new ${1@U} mails"
+    notmuch new || {
+        err_msg+=("notmuch: cannot scan new ${1@U} mails...")
+        return 1
+    }
+
+    count="$( notmuch count -- tag:new AND folder:INBOX )"
+    [[ "${count}" -gt 0 ]] && count_msg+=(">  ${1}: ${count}")
+}
+
+
+# Tag mails with rules
+tag_new_mails() {
+    log 'afew' "Run initial tagging on ${1@U} mails"
+    afew --verbose --tag --new || {
+        err_msg+=("afew: cannot tag new ${1@U} mails...")
+        return 1
+    }
+}
+
+
+# Move mails based on afew rules, remove old mails
+move_mail() {
+    # Move mails
+    log 'afew' "Move ${1@U} mails"
+    afew --verbose --move-mails --all \
+        || errmsg+=("afew: cannot move ${1@U} mails...")
+
+    # Remove old mails
+    log 'rm' "Remove old deleted ${1@U} mails"
+    notmuch search --output=files --format=text0 -- tag:deleted AND date:..2M \
+        | xargs -r0 rm --verbose
+}
+
+
+# Sync contacts and calendars
+cal_card_sync() {
+    log 'vdirsyncer' 'Sync contacts and calendars'
+    vdirsyncer sync \
+        || errmsg+=('vdirsyncer: cannot sync contacts and calendars...')
+}
+
+
+# Notify new mails
+notify_new() {
+    [[ "${#count_msg[@]}" -gt 1 ]] || return
+    notify "$( printf '%s\n' "${count_msg[@]}" )"
+}
+
+
+main() {
+    local account
+
+    init
+
+    for account in "${accounts[@]}"; do
+        export NOTMUCH_CONFIG="${baseconf}/${account}.config"
+           fetch_mails   "${account}" \
+        && add_new_tag   "${account}" \
+        && tag_new_mails "${account}"
+
+        move_mail "${account}"
+    done
+
+    notify_new
+
+    cal_card_sync
+}
+
+main
+cleanup

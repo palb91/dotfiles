@@ -1,0 +1,9 @@
+[Unit]
+Description=Fetch mails every n minutes
+
+[Timer]
+OnActiveSec=1min
+OnUnitActiveSec=5min
+
+[Install]
+WantedBy=timers.target
