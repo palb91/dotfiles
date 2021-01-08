@@ -13,6 +13,9 @@
 !git/
 !git/config
 
+!i3status/
+!i3status/config
+
 !kanshi/
 !kanshi/config
 

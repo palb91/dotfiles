@@ -24,6 +24,10 @@ Dotfiles
    * - ``git``
      - **file:** ``$XDG_CONFIG_HOME/git/config``
 
+     - ``i3status``
+     - :file:    ``$XDG_CONFIG_HOME/i3status/config``
+       :sway:    Run with a python wrapper: ``swaystatus``
+
    * - ``kanshi``
      - **file:** ``$XDG_CONFIG_HOME/kanshi/config``
 
