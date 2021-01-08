@@ -6,7 +6,7 @@ typeset -a err_msg count_msg accounts
 
 pidfile="${XDG_RUNTIME_DIR}"/fetchmail.pid
 pid="${$}"
-baseconf="${XDG_CONFIG_HOME}"/notmuch
+baseconf="${XDG_CONFIG_HOME-${HOME}/.config}"/notmuch
 accounts=( work home )
 count_msg=( "New mails:" )
 
