@@ -7,6 +7,7 @@ config.load_autoconfig(False)
 # Default pages / files / directories
 _ddg  = 'https://start.duckduckgo.com/?kae=t&q={}'
 _edit = 'foot -T float vim {file}'
+_font = {'family': 'Terminus', 'size': '10pt'}
 
 
 # Settings
@@ -35,16 +36,16 @@ c.downloads.position                = 'bottom'
 c.editor.command                    = _edit.split()
 # Fonts........................................................................
 c.fonts.contextmenu                 = 'default_size default_family'
-c.fonts.default_family              = 'Terminus'
-c.fonts.default_size                = '10pt'
+c.fonts.default_family              = _font['family']
+c.fonts.default_size                = _font['size']
 c.fonts.prompts                     = 'default_size default_family'
 # Hints........................................................................
-c.hints.border                      = '1px solid #000'
+c.hints.border                      = '1px solid #0077FF'
 c.hints.chars                       = 'ctsrvdlgh'
+c.hints.radius                      = 2
 c.hints.scatter                     = False
 c.hints.selectors["frame"]          = ['div', 'header', 'section', 'nav']
 # Input........................................................................
-c.input.forward_unbound_keys        = 'none'
 c.input.partial_timeout             = 10000
 # Messages.....................................................................
 c.messages.timeout                  = 4000
@@ -52,7 +53,6 @@ c.messages.timeout                  = 4000
 c.tabs.background                   = True
 c.tabs.mode_on_change               = 'restore'
 c.tabs.position                     = 'left'
-c.tabs.select_on_remove             = 'prev'
 c.tabs.show                         = 'multiple'
 c.tabs.undo_stack_size              = 20
 c.tabs.width                        = 200
@@ -71,7 +71,8 @@ colors = {
   'error':   '#FF3333',
   'warning': '#FFBB33',
   'info':    '#0077FF',
-  'special': '#00FF77'
+  'special': '#00FF77',
+  'hint':    'qlineargradient(x1:0,y1:0,x2:0,y2:0.5,stop:0 #07F,stop:1 #000)'
 }
 # Completion ..................................................................
 c.colors.completion.category.bg                 = colors['bg_sel']
@@ -99,7 +100,7 @@ c.colors.contextmenu.menu.fg                    = colors['fg_sel']
 c.colors.contextmenu.selected.bg                = colors['bg_sel']
 c.colors.contextmenu.selected.fg                = colors['fg_sel']
 # Hints........................................................................
-c.colors.hints.bg                               = colors['bg_sel']
+c.colors.hints.bg                               = colors['hint']
 c.colors.hints.fg                               = colors['fg_sel']
 c.colors.hints.match.fg                         = colors['fg']
 # Keyhint......................................................................
@@ -119,11 +120,11 @@ c.colors.prompts.border                         = colors['info']
 c.colors.prompts.fg                             = colors['fg_sel']
 c.colors.prompts.selected.bg                    = colors['bg']
 # Status bar...................................................................
-c.colors.statusbar.caret.bg                     = colors['bg']
+c.colors.statusbar.caret.bg                     = colors['bg_sel']
 c.colors.statusbar.caret.fg                     = colors['fg_sel']
 c.colors.statusbar.caret.selection.bg           = colors['bg_sel']
 c.colors.statusbar.caret.selection.fg           = colors['fg_sel']
-c.colors.statusbar.insert.bg                    = colors['info']
+c.colors.statusbar.insert.bg                    = colors['bg_sel']
 c.colors.statusbar.insert.fg                    = colors['fg_sel']
 c.colors.statusbar.passthrough.bg               = colors['bg']
 c.colors.statusbar.passthrough.fg               = colors['error']
@@ -163,7 +164,7 @@ c.bindings.default  = {}
 with open('.config/qutebrowser/keys.cfg', 'r') as keyfile:
     for line in keyfile.read().split("\n"):
         stripped = line.lstrip()
-        if len(stripped) == 0:
+        if len(stripped) == 0 or stripped[0] == '#':
             continue
         if line[0] != ' ':
             mode = stripped
