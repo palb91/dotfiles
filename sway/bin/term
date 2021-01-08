@@ -1,11 +1,27 @@
-#!/bin/sh
+#!/bin/bash
 
-[[ "${#}" -eq 0 ]] && set -- tmux
+# No argument: run tmux
+if [[ "${#}" -eq 0 ]]; then
+    set -- tmux
+
+# resurrect last closed session
+elif [[ "${1}" = 'resurrect' ]]; then
+    set -- tmux
+
+    IFS=$'\n' sessions=( $(tmux ls) )
+    for id in "${sessions[@]}"; do
+        if [[ "${id##* }" != '(attached)' ]]; then
+            set -- tmux attach-session -t "${id%%:*}"
+            break
+        fi
+    done
+fi
 
 # Start server if required
 if ! pgrep -a foot | grep -q 'foot \(-s\|--server\)'; then
-    foot --server &
-    sleep 0.5
+    nohup foot --server >/dev/null 2>&1 &
+    notify-send 'foot' 'server started'
+    sleep 2
 fi
 
 exec footclient "${@}"
