@@ -131,6 +131,9 @@ func= {
 
 
 if __name__ == '__main__':
+    # Limit width for widgets
+    widgets = ['cpu_usage', 'cpu_temperature', 'battery', 'run_watch']
+
     print_line(read_line())
     print_line(read_line())
 
@@ -140,12 +143,18 @@ if __name__ == '__main__':
 
         j = json.loads(line)
 
-        j.insert(1, {'name': 'mails', 'full_text': ''})
+        j.insert(0, {'name': 'mails', 'full_text': ''})
 
         for bloc in j:
-            bloc['markup']                = 'pango'
-            bloc['separator']             = False
-            bloc['separator_block_width'] = 20
+            bloc['markup']    = 'pango'
+            bloc['separator'] = False
+
+            if bloc['name'] in widgets:
+                bloc['separator_block_width'] = 0
+                bloc['min_width']             = 20
+                bloc['background']            = '#111111'
+            else:
+                bloc['separator_block_width'] = 25
 
             # Update bloc with it's own named function
             bloc = func[bloc['name']](bloc)
@@ -153,5 +162,7 @@ if __name__ == '__main__':
             # Then update the icons (except for the time)
             if bloc['name'] != 'time':
                 bloc['full_text'] = format_icon(bloc['full_text'])
+            if bloc['name'] == 'battery':
+                bloc['full_text'] = ' ' + bloc['full_text']
 
         print_line(prefix + json.dumps(j))

@@ -8,22 +8,22 @@ general {
   interval       = 5
 }
 
-order += 'run_watch inhibit_idle'
 order += 'volume laptop'
 order += 'volume headset'
 order += 'ethernet _first_'
 order += 'wireless _first_'
 order += 'disk /'
+order += 'battery all'
 order += 'cpu_temperature 0'
 order += 'cpu_usage'
-order += 'battery all'
+order += 'run_watch inhibit_idle'
 order += 'time'
 
 
 run_watch inhibit_idle {
   pidfile     = '/run/user/1002/lock_inhibit.pid'
   format      = '#FF0000 '
-  format_down = ''
+  format_down = '#333333 '
 }
 
 volume laptop {
@@ -56,13 +56,12 @@ disk / {
 }
 
 cpu_temperature 0 {
-  format                          = ''
-  format_above_threshold          = '#FF0000  %degrees°C'
-  max_threshold                   = 50
+  format                          = '#333333 '
+  format_above_threshold          = '#FF0000 '
 }
 
 cpu_usage {
-  format                          = ''
+  format                          = '#333333 '
   format_above_degraded_threshold = '#FFAA00 '
   format_above_threshold          = '#FF0000 '
   degraded_threshold              = 60
@@ -70,11 +69,11 @@ cpu_usage {
 }
 
 battery all {
-  format                          = '%status %percentage'
+  format                          = '%status'
   integer_battery_capacity        = true
   status_chr                      = ''
   status_bat                      = ''
-  #status_full                    = ''
+  status_full                     = ''
   status_unk                      = '?'
   threshold_type                  = 'percentage'
   low_threshold                   = 20
