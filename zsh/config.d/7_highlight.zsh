@@ -19,12 +19,12 @@
 
   # Set colors
   typeset -A color=(
-    'command'  'fg=white,bold'
-    'reserved' 'fg=yellow'
+    'command'  'fg=231,bold'
+    'reserved' 'fg=248,bold'
     'error'    'fg=red'
-    'variable' 'fg=cyan,bold'
-    'comment'  'fg=239'
-    'string'   'fg=221'
+    'variable' 'fg=74,bold'
+    'comment'  'fg=237'
+    'string'   'fg=136'
     'special'  'fg=blue'
     'path'     'fg=105,underline'
   )

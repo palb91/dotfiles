@@ -12,7 +12,7 @@ function set_prompt() {
 
   # Show venv status, then print prompt colored following return value
   PROMPT="${${VIRTUAL_ENV+${PROMPT_VENV}}:- }"
-  PROMPT+='%B%F{%(?,cyan,red)}≡%f%b '
+  PROMPT+='%B%F{%(?,244,red)}≡%f%b '
 }
 
 
@@ -33,9 +33,9 @@ function set_rprompt() {
       || RPROMPT+='%F{red}× '
 
     RPROMPT+="${git_branch}"
-    RPROMPT+='%f·%B%F{blue}'
+    RPROMPT+='%f·%B%F{244}'
     RPROMPT+="${git_toplvl##*/}"
-    RPROMPT+='%b%F{cyan}/'
+    RPROMPT+='%b%F{242}/'
     RPROMPT+="${git_curdir}"
 
     return
@@ -43,7 +43,7 @@ function set_rprompt() {
 
   # Get current working directory with ~ style
   local cwd=%~; cwd="${(%)cwd}"
-  RPROMPT+='%F{cyan}'
+  RPROMPT+='%F{242}'
 
   # Add short PWD
   [[ "${#cwd}" -le 20 ]] && RPROMPT+="${cwd}" && return
