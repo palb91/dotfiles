@@ -13,6 +13,7 @@ count_msg=( "New mails:" )
 
 # Utils
 status_update() { pkill -U "${USER}" -SIGUSR1 i3status;      }  # Update WM bar
+mui_update()    { pkill -U "${USER}" -SIGUSR1 alot;          }  # Update WM bar
 notify()        { notify-send "" "${@}";                    }  # Message
 log()           { printf '\n[ %s ] %s\n' "${1}" "${2}";      }  # Text output
 cleanup()       { rm -f "${pidfile}"; status_update; exit 0; }  # Clean exit
@@ -111,6 +112,7 @@ main() {
     done
 
     notify_new
+    mui_update
 
     cal_card_sync
 }
