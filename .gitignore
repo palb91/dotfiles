@@ -7,6 +7,8 @@
 !davmail/
 !davmail/config
 
+!flake8
+
 !foot/
 !foot/foot.ini
 

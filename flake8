@@ -1,0 +1,10 @@
+## Flake8 configuration
+
+[flake8]
+ignore =
+    # multiple spaces before keyword/operator
+    E272,E221
+
+exclude =
+    .git,
+    __pycache__

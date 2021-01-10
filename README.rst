@@ -19,6 +19,9 @@ Dotfiles
        - Edit ``davmail.url`` in configuration.
        - Run ``systemctl --user enable --now davmail``.
 
+   * - ``flake8``
+     - Integrated in ``vim``
+
    * - ``foot``
      -
 
