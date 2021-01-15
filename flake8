@@ -3,7 +3,7 @@
 [flake8]
 ignore =
     # multiple spaces before keyword/operator
-    E272,E221
+    E272,E221,E241
 
 exclude =
     .git,
