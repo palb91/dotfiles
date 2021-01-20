@@ -18,6 +18,7 @@
     ccat   'bat -pp'
     r      'ranger'
     o      'rifle'
+    sysu   'systemctl --user'
     Mount  'udevil mount'
     UMount 'udevil umount'
   )

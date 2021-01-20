@@ -20,5 +20,3 @@ man() {
 # Few utils
 mkcd() { mkdir -p "${1}" && cd "${_}" }
 myip() { curl -s monip.org | grep -o 'IP : [0-9.]\+' }
-urlenc() {python3 -c "import urllib.parse as p; print(p.quote('$1'))"   }
-urldec() {python3 -c "import urllib.parse as p; print(p.unquote('$1'))" }

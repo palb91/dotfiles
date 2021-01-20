@@ -1,19 +1,6 @@
 ## ZSH Profile
 
 
-# Systemd
-#systemctl --user import-environment \
-#    XDG_CONFIG_HOME                 \
-#    XDG_DATA_HOME                   \
-#    XDG_CACHE_HOME                  \
-#    XDG_RUNTIME_DIR                 \
-#    SSH_AUTH_SOCK                   \
-#    GPG_TTY                         \
-#    GNUPGHOME                       \
-#    PASSWORD_STORE_DIR              \
-#    DBUS_SESSION_BUS_ADDRESS
-
-
 sway() {
     export QT_QPA_PLATFORM=wayland
     export QT_QPA_PLATFORMTHEME=qt5ct
@@ -32,7 +19,7 @@ sway() {
         _JAVA_AWT_WM_NONREPARENTING         \
         PATH
 
-    exec command sway
+    exec command sway &>"${XDG_CACHE_HOME}"/sway.logs
 }
 
 # Sway on tty1
