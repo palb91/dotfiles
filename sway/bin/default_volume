@@ -5,7 +5,7 @@ pactl list sinks short \
       SINK="$(echo "${SINK}" | awk '{ printf $2 }')"
 
       case "${SINK}" in
-        *AmazonBasics*) pactl set-sink-volume "${SINK}" 31% ;;
+        *AmazonBasics*) pactl set-sink-volume "${SINK}" 32% ;;
                      *) pactl set-sink-volume "${SINK}" 20% ;;
       esac
   done
