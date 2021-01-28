@@ -39,6 +39,8 @@ set number                            " Show line numbers
 set cursorline cursorlineopt=both     " Show current line number
 set scrolloff=10                      " Visible lines when scrolling
 set colorcolumn=80                    " Line max width
+set textwidth=79                      " Max chars on a line
+set nowrap                            " Do not wrap too long lines
 set linebreak                         " Don't wrap in a middle of a word
 
 set list

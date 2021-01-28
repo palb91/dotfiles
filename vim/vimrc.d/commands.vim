@@ -1,3 +1,3 @@
 "" Vim commands
 
-command! Make w | silent make | redraw | cwindow
+command! -bang Make w | silent make<bang> | redraw!
