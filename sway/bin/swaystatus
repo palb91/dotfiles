@@ -5,8 +5,21 @@
 import os
 import sys
 import json
-import psutil
-import notmuch
+import re
+from datetime import datetime
+
+try:
+    import psutil
+    import notmuch
+except ModuleNotFoundError:
+    pass
+
+try:
+    from khal.settings    import get_config       as khal_get_cfg
+    from khal.cli         import build_collection as khal_collection
+    from khal.controllers import khal_list
+except ModuleNotFoundError:
+    pass
 
 
 def print_line(line):
@@ -32,17 +45,48 @@ def format_icon(text):
     return '%s %s' % (icon, ' '.join(text))
 
 
+def khal_view(bloc):
+    """khal next event."""
+    try:
+        config   = khal_get_cfg()
+        events   = khal_collection(config, 'work')
+        datefmt  = config["locale"]["datetimeformat"]
+        outfmt   = ' {start-time} {title}'
+        dates    = str(datetime.now().strftime(datefmt)) + ' eod'
+        khallist = khal_list(events, dates, config, outfmt)
+
+        if len(khallist) > 0:
+            text = re.compile(r'\x1b[^m]+m').sub('', khallist.pop())
+
+            if text == 'No events':
+                bloc['full_text'] = ''
+            elif len(text) > 25:
+                bloc['full_text'] = text[:20] + '…'
+            else:
+                bloc['full_text'] = text
+
+    except Exception:
+        bloc['full_text'] = '#F44 '
+
+    return bloc
+
+
 def run_watch(bloc):       return bloc
 def ethernet(bloc):        return bloc
 def wireless(bloc):        return bloc
 def disk_info(bloc):       return bloc
 def cpu_temperature(bloc): return bloc
 def cpu_usage(bloc):       return bloc
+def battery(bloc):         return bloc
 
 
 def mails(bloc):
     """Get the count with notmuch."""
+    if 'psutil' not in sys.modules or 'notmuch' not in sys.modules:
+        return bloc
+
     def is_fetchmail_running():
+        """Check status of process fetchmail."""
         pid_file = os.environ['XDG_RUNTIME_DIR'] + '/fetchmail.pid'
         with open(pid_file, 'r') as pid:
             fetchmail_pid = int(pid.readline().strip())
@@ -52,13 +96,13 @@ def mails(bloc):
                     break
         return False
 
-    db_base  = os.environ['XDG_DATA_HOME'] + '/mails/%s'
-    query    = 'tag:inbox AND tag:unread AND NOT tag:killed'
-    color    = {'work': '#7777FF', 'home': '#77BB77'}
-    out      = ''
-    icon     = ''
-    style    = {'home': str.maketrans('0123456789', '⁰¹²³⁴⁵⁶⁷⁸⁹'),
-                'work': str.maketrans('0123456789', '₀₁₂₃₄₅₆₇₈₉')}
+    db_base = os.environ['XDG_DATA_HOME'] + '/mails/%s'
+    query   = 'tag:inbox AND tag:unread AND NOT tag:killed'
+    color   = {'work': '#7777FF', 'home': '#77BB77'}
+    out     = ''
+    icon    = ''
+    style   = {'home': str.maketrans('0123456789', '⁰¹²³⁴⁵⁶⁷⁸⁹'),
+               'work': str.maketrans('0123456789', '₀₁₂₃₄₅₆₇₈₉')}
 
     # Show if fetching mails
     try:
@@ -76,11 +120,12 @@ def mails(bloc):
         count = db.create_query(query).count_messages()
         db.close()
 
-        if count == 0: continue
+        if count == 0:
+            continue
 
         count = str(count).translate(style[account])
 
-        out+='<span color="%s">%s</span>' % (color[account], count)
+        out += '<span color="%s">%s</span>' % (color[account], count)
 
     if icon == '':
         icon = '#FFFFFF  ' if out != '' else '#333333  '
@@ -92,19 +137,12 @@ def mails(bloc):
 def volume(bloc):
     """Remove the headset bloc if not plugged."""
     if 'AmazonBasics' in bloc['instance']:
-        headset_path = '/proc/asound/Headset'
         try:
-            with open('/proc/asound/Headset/id', 'r'): pass
-        except:
+            with open('/proc/asound/Headset/id', 'r'):
+                pass
+        except Exception:
             bloc['full_text'] = ''
 
-    return bloc
-
-
-def battery(bloc):
-    """Battery: Clear bloc if the battery is full."""
-    if bloc['full_text'][:4] == 'FULL':
-        bloc['full_text'] = ''
     return bloc
 
 
@@ -116,7 +154,8 @@ def time(bloc):
 
 
 # List of bloc functions
-func= {
+func = {
+    "khal_view":       khal_view,
     "mails":           mails,
     "run_watch":       run_watch,
     "volume":          volume,
@@ -139,11 +178,13 @@ if __name__ == '__main__':
 
     while True:
         line, prefix = read_line(), ''
-        if line.startswith(','): line, prefix = line[1:], ','
+        if line.startswith(','):
+            line, prefix = line[1:], ','
 
         j = json.loads(line)
 
-        j.insert(0, {'name': 'mails', 'full_text': ''})
+        j.insert(0, {'name': 'mails',     'full_text': ''})
+        j.insert(0, {'name': 'khal_view', 'full_text': ''})
 
         for bloc in j:
             bloc['markup']    = 'pango'
@@ -151,10 +192,9 @@ if __name__ == '__main__':
 
             if bloc['name'] in widgets:
                 bloc['separator_block_width'] = 0
-                bloc['min_width']             = 20
                 bloc['background']            = '#111111'
             else:
-                bloc['separator_block_width'] = 25
+                bloc['separator_block_width'] = 15
 
             # Update bloc with it's own named function
             bloc = func[bloc['name']](bloc)
