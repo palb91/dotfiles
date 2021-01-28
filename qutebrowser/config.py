@@ -1,5 +1,7 @@
 ## Qutebrowser configuration
 
+import os
+
 # Init
 config.load_autoconfig(False)
 
@@ -160,8 +162,10 @@ c.colors.webpage.darkmode.enabled               = True
 
 
 # Bindings
+mapfile = os.getenv('XDG_CONFIG_HOME', '~/.config') + '/qutebrowser/keys.cfg'
+
 c.bindings.default  = {}
-with open('.config/qutebrowser/keys.cfg', 'r') as keyfile:
+with open(os.path.expanduser(mapfile), 'r') as keyfile:
     for line in keyfile.read().split("\n"):
         stripped = line.lstrip()
         if len(stripped) == 0 or stripped[0] == '#':
