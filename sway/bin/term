@@ -4,6 +4,10 @@
 if [[ "${#}" -eq 0 ]]; then
     set -- tmux
 
+# Allow passing options to foot itself
+elif [[ "${#}" -eq 1 ]] && [[ "${1}" =~ ^"-" ]]; then
+    set -- "${1}" tmux
+
 # resurrect last closed session
 elif [[ "${1}" = 'resurrect' ]]; then
     set -- tmux
