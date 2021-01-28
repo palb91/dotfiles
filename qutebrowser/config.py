@@ -175,7 +175,16 @@ with open(os.path.expanduser(mapfile), 'r') as keyfile:
         else:
             config.bind(*line.split(maxsplit=1), mode=mode)
 
+
 # URL Settings
-# with url.pattern('*teams*'):
-#   c.content.mute = False
-#   c.content.ssl_strict = True
+with config.pattern('*://teams.microsoft.com/*') as p:
+    p.content.unknown_url_scheme_policy = "allow-all"
+
+# Teams 3rd parties
+for pattern in [ '*://[*.]microsoft.com/*',
+                 '*://[*.]microsoftonline.com/*',
+                 '*://[*.]teams.skype.com/*',
+                 '*://[*.]teams.microsoft.com/*',
+                 '*://[*.]sfbassets.com/*',
+                 '*://[*.]skypeforbusiness.com/*' ]:
+    c.content.cookies.accept = "all"
