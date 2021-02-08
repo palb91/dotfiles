@@ -57,7 +57,7 @@ c.tabs.mode_on_change               = 'restore'
 c.tabs.position                     = 'left'
 c.tabs.show                         = 'multiple'
 c.tabs.undo_stack_size              = 20
-c.tabs.width                        = 200
+c.tabs.width                        = 60
 # URL..........................................................................
 c.url.default_page                  = 'about:blank'
 c.url.searchengines                 = {'DEFAULT': _ddg}
