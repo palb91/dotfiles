@@ -1,6 +1,6 @@
 ## Swayidle configuration
 
-timeout 120  'loginctl lock-session'
-timeout 115  'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+timeout 180  'loginctl lock-session'
+timeout 172  'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
 before-sleep 'loginctl lock-session'
-lock         'swaylock'
+lock         'swaylock && swaymsg reload'
