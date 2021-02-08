@@ -31,9 +31,6 @@ Dotfiles
    * - ``i3status``
      - Wrapped by ``swaystatus``
 
-   * - ``kanshi``
-     -
-
    * - ``mako``
      -
 

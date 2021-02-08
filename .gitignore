@@ -71,6 +71,8 @@
 !vim/colors/*
 !vim/ftplugin/
 !vim/ftplugin/*
+!vim/indent/
+!vim/indent/*
 
 !zathura/
 !zathura/zathurarc
