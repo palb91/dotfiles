@@ -153,22 +153,6 @@ def time(bloc):
     return bloc
 
 
-# List of bloc functions
-func = {
-    "khal_view":       khal_view,
-    "mails":           mails,
-    "run_watch":       run_watch,
-    "volume":          volume,
-    "ethernet":        ethernet,
-    "wireless":        wireless,
-    "disk_info":       disk_info,
-    "cpu_temperature": cpu_temperature,
-    "cpu_usage":       cpu_usage,
-    "battery":         battery,
-    "time":            time
-}
-
-
 if __name__ == '__main__':
     # Limit width for widgets
     widgets = ['cpu_usage', 'cpu_temperature', 'battery', 'run_watch']
@@ -193,7 +177,7 @@ if __name__ == '__main__':
             bloc['separator_block_width'] = 0 if bloc['name'] in widgets else 15
 
             # Update bloc with it's own named function
-            bloc = func[bloc['name']](bloc)
+            bloc = globals()[bloc['name']](bloc)
 
             # Then update the icons (except for the time)
             if bloc['name'] != 'time':
