@@ -149,7 +149,7 @@ def volume(bloc):
 def time(bloc):
     """Time: White on grey."""
     bloc['color']      = "#FFFFFF"
-    bloc['background'] = '#333333'
+    bloc['background'] = '#222222'
     return bloc
 
 
@@ -190,11 +190,7 @@ if __name__ == '__main__':
             bloc['markup']    = 'pango'
             bloc['separator'] = False
 
-            if bloc['name'] in widgets:
-                bloc['separator_block_width'] = 0
-                bloc['background']            = '#111111'
-            else:
-                bloc['separator_block_width'] = 15
+            bloc['separator_block_width'] = 0 if bloc['name'] in widgets else 15
 
             # Update bloc with it's own named function
             bloc = func[bloc['name']](bloc)
