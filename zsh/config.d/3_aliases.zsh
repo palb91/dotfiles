@@ -16,6 +16,7 @@
     dd     'dd status=progress'
     diff   'diff --color=auto'
     ccat   'bat -pp'
+    e      'vim'
     r      'ranger'
     o      'rifle'
     sysu   'systemctl --user'
