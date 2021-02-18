@@ -1,0 +1,9 @@
+#!/bin/sh
+
+script=/usr/share/sway-git/scripts/inactive-windows-transparency.py
+procs="$(ps axo pid,cmd)"
+running="$(echo "${procs}" | awk "/${script##*/}/ {print \$1; exit}")"
+
+[ -z "${running}" ]            \
+    && exec "${script}" -o 0.5 \
+    || kill "${running%% *}" &
