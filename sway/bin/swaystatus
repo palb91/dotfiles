@@ -21,6 +21,12 @@ try:
 except ModuleNotFoundError:
     pass
 
+re_all = {
+    'ansi':   re.compile(r'\x1b[^m]+m'),
+    'time':   re.compile(r'^\d\d:\d\d '),
+    'colors': re.compile(r'^#[0-9A-F]{6}')
+}
+
 
 def print_line(line):
     """Output unbufferized."""
@@ -38,35 +44,53 @@ def format_icon(text):
     if len(text) == 0:
         return ''
 
-    text = text.split()
-    color = text.pop(0) if text[0][0] == '#' else '#FFFFFF'
-    icon = '<span color="%s">%s</span>' % (color, text.pop(0))
+    text   = text.split()
+    re_col = re_all['colors']
+    color  = text.pop(0) if re_col.match(text[0]) else '#FFFFFF'
+    icon   = '<span color="%s">%s</span>' % (color, text.pop(0))
 
     return '%s %s' % (icon, ' '.join(text))
 
 
 def khal_view(bloc):
     """khal next event."""
+    def show_as_urgent(text, dtime):
+        """Print the time in red if almost the time."""
+        event_time = dtime.replace(hour=int(text[:2]), minute=int(text[3:5]))
+
+        if (event_time - dtime).seconds <= 900:
+            text = '<span color="#FF2222">' + text[:5] + '</span>' + text[5:]
+
+        return text
+
     try:
         config   = khal_get_cfg()
         events   = khal_collection(config, 'work')
         datefmt  = config["locale"]["datetimeformat"]
-        outfmt   = ' {start-time} {title}'
-        dates    = str(datetime.now().strftime(datefmt)) + ' eod'
+        outfmt   = '{start-time} {title}'
+        dtime    = datetime.now()
+        dates    = str(dtime.strftime(datefmt)) + ' eod'
         khallist = khal_list(events, dates, config, outfmt)
+        re_ansi  = re_all['ansi']
+        re_time  = re_all['time']
+        text     = ''
 
-        if len(khallist) > 0:
-            text = re.compile(r'\x1b[^m]+m').sub('', khallist.pop())
-
-            if text == 'No events':
-                bloc['full_text'] = ''
-            elif len(text) > 25:
-                bloc['full_text'] = text[:20] + '…'
+        while len(khallist):
+            text = re_ansi.sub('', khallist.pop(0))
+            if re_time.match(text):
+                break
             else:
-                bloc['full_text'] = text
+                text = ''
+
+        if text == '':
+            bloc['full_text'] = ''
+        elif len(text) > 25:
+            bloc['full_text'] = ' ' + show_as_urgent(text[:20] + '…', dtime)
+        else:
+            bloc['full_text'] = ' ' + show_as_urgent(text, dtime)
 
     except Exception:
-        bloc['full_text'] = '#F44 '
+        bloc['full_text'] = '#FF2222 '
 
     return bloc
 
@@ -88,12 +112,15 @@ def mails(bloc):
     def is_fetchmail_running():
         """Check status of process fetchmail."""
         pid_file = os.environ['XDG_RUNTIME_DIR'] + '/fetchmail.pid'
-        with open(pid_file, 'r') as pid:
-            fetchmail_pid = int(pid.readline().strip())
-            for p in psutil.process_iter():
-                if p.pid == fetchmail_pid and p.name() == 'fetchmail':
-                    return True
-                    break
+
+        if os.path.isfile(pid_file):
+            with open(pid_file, 'r') as pid:
+                fetchmail_pid = int(pid.readline().strip())
+                for p in psutil.process_iter():
+                    if p.pid == fetchmail_pid and p.name() == 'fetchmail':
+                        return True
+                        break
+
         return False
 
     db_base = os.environ['XDG_DATA_HOME'] + '/mails/%s'
@@ -105,11 +132,8 @@ def mails(bloc):
                'work': str.maketrans('0123456789', '₀₁₂₃₄₅₆₇₈₉')}
 
     # Show if fetching mails
-    try:
-        if is_fetchmail_running():
-            icon = ' '
-    except FileNotFoundError:
-        pass
+    if is_fetchmail_running():
+        icon = ' '
 
     for account in ['work', 'home']:
         db_dir = db_base % account
@@ -155,7 +179,7 @@ def time(bloc):
 
 if __name__ == '__main__':
     # Limit width for widgets
-    widgets = ['cpu_usage', 'cpu_temperature', 'battery', 'run_watch']
+    widget = ['cpu_usage', 'cpu_temperature', 'battery', 'run_watch']
 
     print_line(read_line())
     print_line(read_line())
@@ -174,7 +198,7 @@ if __name__ == '__main__':
             bloc['markup']    = 'pango'
             bloc['separator'] = False
 
-            bloc['separator_block_width'] = 0 if bloc['name'] in widgets else 15
+            bloc['separator_block_width'] = 0 if bloc['name'] in widget else 15
 
             # Update bloc with it's own named function
             bloc = globals()[bloc['name']](bloc)
