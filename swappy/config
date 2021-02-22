@@ -1,6 +1,6 @@
 [Default]
 save_dir=$HOME/media/screenshots
-save_filename_format=shot-%Y%m%d-%H%M%S.png
+save_filename_format=shot-%Y_%m_%d-%H:%M:%S.png
 show_panel=true
 text_font=Terminus
 text_size=11

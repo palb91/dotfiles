@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -z "$(command -v swappy)" ]; then
+    notify-send "${0##*/}" 'swappy not installed'
+    exit 1
+fi
+
+s_path="${HOME}/media/screenshots"
+s_file="$(ls -t "${s_path}" | bemenu | head -1)"
+
+[ -n "${s_file}" ] || exit 0
+
+cp "${s_path}/${s_file}" "${s_path}/${s_file}.orig"
+swappy -f "${s_path}/${s_file}" -o "${s_path}/${s_file}"
