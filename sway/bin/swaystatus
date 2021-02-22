@@ -59,7 +59,8 @@ def khal_view(bloc):
         event_time = dtime.replace(hour=int(text[:2]), minute=int(text[3:5]))
 
         if (event_time - dtime).seconds <= 900:
-            text = '<span color="#FF2222">' + text[:5] + '</span>' + text[5:]
+            text = '<span color="#FF2222"><b>%s</b></span>%s' % \
+                    (text[:5], text[5:])
 
         return text
 
@@ -78,6 +79,7 @@ def khal_view(bloc):
         while len(khallist):
             text = re_ansi.sub('', khallist.pop(0))
             if re_time.match(text):
+                text = text.replace('<', '&lt;').replace('>', '&gt;')
                 break
             else:
                 text = ''
