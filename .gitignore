@@ -35,6 +35,9 @@
 !qutebrowser/config.py
 !qutebrowser/keys.cfg
 
+!swappy/
+!swappy/config
+
 !sway/
 !sway/config
 !sway/config.d/

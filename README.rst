@@ -46,6 +46,9 @@ Dotfiles
    * - ``tmux``
      -
 
+   * - ``swappy``
+     -
+
    * - ``sway``
      -
 
