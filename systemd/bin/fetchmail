@@ -15,9 +15,9 @@ count_msg=( "New mails:" )
 status_update() { pkill -U "${USER}" -SIGUSR1 i3status;      }  # Update WM bar
 mui_update()    { pkill -U "${USER}" -SIGUSR1 alot;          }  # Update WM bar
 notify()        { notify-send "" "${@}";                    }  # Message
+notify_err()    { notify -u critical "${@}";                 }  # On error
 log()           { printf '\n[ %s ] %s\n' "${1}" "${2}";      }  # Text output
 cleanup()       { rm -f "${pidfile}"; status_update; exit 0; }  # Clean exit
-notify_err()    { notify -u critical "${@}";                 }  # On error
 
 
 # Prevent concurrent executions, setup clean exit
@@ -104,9 +104,10 @@ main() {
 
     for account in "${accounts[@]}"; do
         export NOTMUCH_CONFIG="${baseconf}/${account}.config"
-           fetch_mails   "${account}" \
-        && add_new_tag   "${account}" \
-        && tag_new_mails "${account}"
+        fetch_mails "${account}" && {
+            add_new_tag "${account}"
+            tag_new_mails "${account}"
+        }
 
         move_mail "${account}"
     done
