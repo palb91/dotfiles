@@ -17,6 +17,8 @@
     diff   'diff --color=auto'
     ccat   'bat -pp'
     e      'vim'
+    E      'sudo -E vim'
+    svim   'sudo -E vim'
     r      'ranger'
     o      'rifle'
     sysu   'systemctl --user'
