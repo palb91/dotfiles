@@ -5,5 +5,5 @@ procs="$(ps axo pid,cmd)"
 running="$(echo "${procs}" | awk "/${script##*/}/ {print \$1; exit}")"
 
 [ -z "${running}" ]            \
-    && exec "${script}" -o 0.5 \
+    && exec "${script}" -o 0.7 \
     || kill "${running%% *}" &
