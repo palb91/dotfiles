@@ -28,12 +28,6 @@ re_all = {
 }
 
 
-def print_line(line):
-    """Output unbufferized."""
-    sys.stdout.write(line + '\n')
-    sys.stdout.flush()
-
-
 def read_line():
     """Read standard input line by line."""
     return sys.stdin.readline().strip()
@@ -183,8 +177,8 @@ if __name__ == '__main__':
     # Limit width for widgets
     widget = ['cpu_usage', 'cpu_temperature', 'battery', 'run_watch']
 
-    print_line(read_line())
-    print_line(read_line())
+    print(read_line(), flush=True)
+    print(read_line(), flush=True)
 
     while True:
         line, prefix = read_line(), ''
@@ -211,4 +205,4 @@ if __name__ == '__main__':
             if bloc['name'] == 'battery':
                 bloc['full_text'] = ' ' + bloc['full_text']
 
-        print_line(prefix + json.dumps(j))
+        print(prefix + json.dumps(j), flush=True)
