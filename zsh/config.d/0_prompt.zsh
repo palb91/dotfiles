@@ -10,6 +10,9 @@ function set_prompt() {
   # Space between prompts (but not at beginning)
   [[ -v init_prompt ]] && unset init_prompt || echo
 
+  # Force visible cursor
+  tput cnorm
+
   # Show venv status, then print prompt colored following return value
   PROMPT="${${VIRTUAL_ENV+${PROMPT_VENV}}:- }"
   PROMPT+='%B%F{%(?,244,red)}≡%f%b '
