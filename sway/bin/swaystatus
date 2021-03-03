@@ -5,6 +5,7 @@
 import os
 import sys
 import json
+import subprocess
 import re
 from datetime import datetime
 
@@ -154,6 +155,26 @@ def mails(bloc):
     return bloc
 
 
+def rss(bloc):
+    """Get the count of unread RSS feeds."""
+    icon  = ''
+    color = '#CC6600'
+    cmd   = 'canto-remote status'
+
+    try:
+        count = subprocess.check_output(cmd, shell=True, text=True)
+    except Exception:
+        return bloc
+
+    if int(count) == 0:
+        bloc['full_text'] = '#333333 ' + icon
+    else:
+        bloc['full_text'] = ('%s <span color="%s">%s</span>' %
+                            (icon, color, str(count)))
+
+    return bloc
+
+
 def volume(bloc):
     """Remove the headset bloc if not plugged."""
     if 'AmazonBasics' in bloc['instance']:
@@ -187,6 +208,7 @@ if __name__ == '__main__':
 
         j = json.loads(line)
 
+        j.insert(0, {'name': 'rss',       'full_text': ''})
         j.insert(0, {'name': 'mails',     'full_text': ''})
         j.insert(0, {'name': 'khal_view', 'full_text': ''})
 
