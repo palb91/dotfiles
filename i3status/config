@@ -70,6 +70,7 @@ cpu_usage {
 
 battery all {
   format                          = '%status'
+  format_down                     = ''
   integer_battery_capacity        = true
   status_chr                      = ''
   status_bat                      = ''
