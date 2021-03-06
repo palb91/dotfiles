@@ -4,7 +4,7 @@ PID_FILE="${XDG_RUNTIME_DIR}"/lock_inhibit.pid
 
 
 set_inhibitor() {
-    nohup systemd-inhibit --what=idle sleep infinity >/dev/null 2>&1 &
+    systemd-inhibit --what=idle sleep infinity >/dev/null 2>&1 &
     echo "${!}" > "${PID_FILE}"
     return
 }
@@ -23,6 +23,12 @@ toggle_inhibitor() {
         || set_inhibitor
 }
 
+
+update_bar() {
+    pkill i3blocks -SIGRTMIN+10
+}
+
+
 if [ "${1}" = 'lock' ]; then
     remove_inhibitor
     loginctl lock-session
@@ -30,5 +36,7 @@ else
     toggle_inhibitor                    # Toggle autolock
     pkill -U$USER -SIGUSR1 i3status     # Then update i3bar
 fi
+
+update_bar
 
 exit 0

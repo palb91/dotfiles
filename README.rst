@@ -28,8 +28,8 @@ Dotfiles
    * - ``git``
      -
 
-   * - ``i3status``
-     - Wrapped by ``swaystatus``
+   * - ``i3blocks``
+     -
 
    * - ``mako``
      -

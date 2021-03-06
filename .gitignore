@@ -15,8 +15,10 @@
 !git/
 !git/config
 
-!i3status/
-!i3status/config
+!i3blocks/
+!i3blocks/config
+!i3blocks/bin/
+!i3blocks/bin/*
 
 !kanshi/
 !kanshi/config

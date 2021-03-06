@@ -1,0 +1,22 @@
+## i3blocks configuration file
+
+
+# Global properties
+separator=false
+separator_block_width=15
+markup=pango
+
+
+# Blocks
+[lock]
+command=bin/lock
+separator_block_width=0
+interval=once
+signal=10
+
+
+[time]
+command=date +'   %a %d %b %R  '
+color=#FFFFFF
+background=#222222
+interval=5
