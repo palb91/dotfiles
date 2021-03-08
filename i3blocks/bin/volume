@@ -1,0 +1,53 @@
+#!/bin/sh
+
+# Set environment variables
+icon_up="${icon_up:-}"
+icon_mute="${icon_mute:-}"
+device="${device:-PCH}"
+card=
+
+scan() {
+    card="$(realpath -e /proc/asound/"${device}" 2>/dev/null)"
+
+    # Get scontrol name automatically (First in the list)
+    card_id="${card#*card}"
+    scontrol="$(amixer -c "${card_id}" scontrols)"
+    scontrol="${scontrol#*\'}"
+    scontrol="${scontrol%%\'*}"
+
+    update
+}
+
+update() {
+    # No card id, return nothing
+    [ -z "${card}" ] && { printf '\n'; return 0; }
+
+    # Else get the volume and mute_state
+    card_id="${card#*card}"
+    output="$(amixer -c "${card_id}" sget "${scontrol}")"
+
+    mute_state="${output##* }"          # Get the state [on] or [off]
+
+    volume="${output##*Mono:}"
+    volume="${volume%\%]*}"
+    volume="${volume##*[}%"
+
+    if [ "${mute_state}" = "[off]" ]; then
+        printf '<span color="#333333">%s</span>\n' "${icon_mute}"
+        return 0
+    fi
+
+    printf '<span color="#FFFFFF">%s</span> %s\n' "${icon_up}" "${volume}"
+
+}
+
+
+# Init
+scan
+
+while read -r event; do
+    case "${event#Event \'}" in
+        change*) update ;;
+        *)       scan   ;;
+    esac
+done < <(pactl subscribe | stdbuf -oL grep 'on sink')

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+icon=
+ipath=/sys/class/net/"${1:-enp0s31f6}"
+istate="${ipath}"/operstate
+ip=
+
+# Set icon to wifi
+[ -d "${ipath}/wireless" ] && icon=
+
+# Get IP address
+if [ -L "${ipath}" ]; then
+    [ "$(<"${istate}")" = 'up' ] && {
+        ip="$(ip addr show "${1}")"
+        ip="${ip#*inet }"
+        ip="${ip%%/*}"
+    }
+fi
+
+[ -n "${ip}" ] \
+    && printf '<span color="#FFFFFF">%s</span> %s\n' "${icon}" "${ip}" \
+    || printf '<span color="#333333">%s</span>\n'    "${icon}"

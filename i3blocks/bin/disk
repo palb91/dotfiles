@@ -1,0 +1,6 @@
+#!/bin/sh
+
+icon='<span color="#FFFFFF"></span>'
+avail="$(df -hl --output=avail / | grep -o '[0-9].*$')"
+
+printf '%s %s\n' "${icon}" "${avail}"

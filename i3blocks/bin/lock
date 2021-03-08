@@ -2,7 +2,7 @@
 
 lockfile="${XDG_RUNTIME_DIR}"/lock_inhibit.pid
 
-[ -f "${lockfile}" ] && icon=  color='#FF0000' \
-                     || icon=  color='#333333'
+[ -f "${lockfile}" ] && icon=  color='#FF0000' \
+                     || icon=  color='#333333'
 
-printf '%s \n\n%s\n' "${icon}" "${color}"
+printf '%s\n\n%s\n' "${icon}" "${color}"

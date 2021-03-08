@@ -4,19 +4,52 @@
 # Global properties
 separator=false
 separator_block_width=15
+min_width=15
+align=center
 markup=pango
+interval=5
 
 
 # Blocks
+[mails]
+command=bin/mails
+interval=persist
+
+
+[sound_laptop]
+command=bin/volume
+interval=persist
+
+
+[sound_headset]
+device=Headset
+icon_up=
+icon_mute=×
+command=bin/volume
+interval=persist
+
+
+[ethernet]
+command=bin/network
+
+
+[wifi]
+command=bin/network wlan0
+
+
+[disk]
+command=bin/disk
+interval=30
+
+
 [lock]
 command=bin/lock
-separator_block_width=0
-interval=once
+separator_block_width=5
 signal=10
+interval=once
 
 
 [time]
 command=date +'   %a %d %b %R  '
 color=#FFFFFF
 background=#222222
-interval=5

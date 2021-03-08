@@ -1,0 +1,69 @@
+#!/bin/sh
+
+declare -A mailboxes colors icons
+
+mail_base="${XDG_DATA_HOME:-${HOME}/.local/share}"/mails
+cfg_base="${XDG_CONFIG_HOME}"/notmuch
+fetchmail_pidfile="${XDG_RUNTIME_DIR}"/fetchmail.pid
+icons=([unread]='<span color="#FFFFFF"></span>'
+       [read]='<span color="#333333"></span>'
+       [fetch]='<span color="#FFFFFF"></span>')
+icon=
+count_out=
+
+mailboxes[work]="${mail_base}"/work  colors[work]='#7777FF'
+mailboxes[home]="${mail_base}"/home  colors[home]='#77BB77'
+
+get_counts() {
+    count_out=
+
+    for mailbox in "${!mailboxes[@]}"; do
+        export NOTMUCH_CONFIG="${cfg_base}/${mailbox}.config"
+        count="$(notmuch count -- tag:inbox AND tag:unread)"
+        color="${colors[${mailbox}]}"
+
+        [ "${count}" -gt 0 ]                \
+            && count_out+="${count_out:+·}" \
+            && count_out+="<span color=\"${color}\">${count}</span>"
+    done
+}
+
+display() {
+    # Default: there are unread mails
+    icon="${icons[unread]}"
+
+    # Set count output and set read icon
+    get_counts
+    [ -z "${count_out}" ] && icon="${icons[read]}"
+
+    # If fetchmail is running, overide the icon
+    [ -f "${fetchmail_pidfile}" ] && icon="${icons[fetch]}"
+
+    printf '%s %s\n' "${icon}" "${count_out}"
+}
+
+wait_access() {
+    # Filter inotify event types
+    set -- -qqre modify,close_write,create,delete
+
+    # Add mailboxes to monitor
+    for mailbox in "${mailboxes[@]}"; do
+        set -- "${@}" "${mailbase}/${mailbox}"/.notmuch/xapian
+    done
+
+    # Add fetching process to monitor
+    set -- "${@}" "${XDG_RUNTIME_DIR}"
+
+    # Filter files
+    set -- "${@}" --include '.*\.glass|fetchmail.pid'
+
+    inotifywait "${@}"
+}
+
+# Init
+display
+
+# Wait for an event before writing anything.
+while wait_access; do
+    display
+done
