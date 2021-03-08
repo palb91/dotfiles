@@ -16,6 +16,10 @@ server=dslan
 command=bin/share
 
 
+[calendar]
+command=bin/calendar
+
+
 [mails]
 command=bin/mails
 interval=persist
