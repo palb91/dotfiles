@@ -11,6 +11,11 @@ interval=5
 
 
 # Blocks
+[share]
+server=dslan
+command=bin/share
+
+
 [mails]
 command=bin/mails
 interval=persist

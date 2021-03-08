@@ -1,0 +1,11 @@
+#!/bin/sh
+
+share_dir=/media/belux/01_Projet
+
+if [ -d "${share_dir}" ]; then
+    printf '<span color="#FFFFFF"></span> belux\n'
+
+elif host filer.ds | grep -q 'filer.ds has address '; then
+    printf '<span color="#333333"> belux</span>\n'
+
+fi
