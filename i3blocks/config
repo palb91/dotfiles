@@ -51,6 +51,11 @@ command=bin/disk
 interval=30
 
 
+[battery]
+command=bin/battery
+interval=30
+
+
 [lock]
 command=bin/lock
 separator_block_width=5

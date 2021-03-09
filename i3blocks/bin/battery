@@ -1,0 +1,60 @@
+#!/bin/sh
+
+set_alarm() {
+    level="${1}"
+    under25="${XDG_RUNTIME_DIR}"/battery_25
+    under10="${XDG_RUNTIME_DIR}"/battery_10
+
+    # Notify the first time the battery is under 10
+    if [ "${level}" -le 100 ]; then
+        [ -f "${under10}" ] && return
+
+        notify-send -u critical '' " ${level}% remaining"
+        touch "${under10}"
+
+    # Notify the first time the battery is under 25
+    elif [ "${level}" -le 25 ]; then
+        [ -f "${under10}" ] && rm "${under10}"
+        [ -f "${under25}" ] && return
+
+        notify-send -u critical '' " ${level}% remaining"
+        touch "${under25}"
+
+    # Remove "inhibitors"
+    else
+        [ -f "${under10}" ] && rm "${under10}"
+        [ -f "${under25}" ] && rm "${under25}"
+
+    fi
+}
+
+bat=/sys/class/power_supply/BAT0
+level="$(<"${bat}"/capacity)"
+state="$(<"${bat}"/status)"
+icon=
+
+# No battery found
+[ -d "${bat}" ] || { printf '<span color="#FF0000">×</span>\n'; exit 0; }
+
+# Full battery, display nothing
+[ "${capacity}" -gt 95 ] && { printf '\n'; } #exit 0; }
+
+# Else display capacity
+if [ "${state}" = 'Charging' ]; then
+    icon='<span color="#FFDD00"></span>'
+elif [ "${level}" -gt 90 ]; then
+    icon='<span color="#333333"></span>'
+elif [ "${level}" -gt 70 ]; then
+    icon='<span color="#777777"></span>'
+elif [ "${level}" -gt 45 ]; then
+    icon='<span color="#777700"></span>'
+elif [ "${level}" -gt 25 ]; then
+    icon='<span color="#773300"></span>'
+else
+    icon='<span color="#FF0000"></span>'
+fi
+
+# Output an alert on low capacity
+set_alarm "${level}"
+
+printf '%s %s%\n' "${icon}" "${level}"
