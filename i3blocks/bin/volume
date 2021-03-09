@@ -26,7 +26,8 @@ update() {
     card_id="${card#*card}"
     output="$(amixer -c "${card_id}" sget "${scontrol}")"
 
-    mute_state="${output##* }"          # Get the state [on] or [off]
+    # Get the state [on] or [off]
+    mute_state="${output##* }"
 
     volume="${output##*Mono:}"
     volume="${volume%\%]*}"
