@@ -48,7 +48,7 @@ wait_access() {
 
     # Add mailboxes to monitor
     for mailbox in "${mailboxes[@]}"; do
-        set -- "${@}" "${mail_base}/${mailbox}"/.notmuch/xapian
+        set -- "${@}" "${mailbox}"/.notmuch/xapian
     done
 
     # Add fetching process to monitor
