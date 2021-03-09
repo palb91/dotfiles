@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 declare -A mailboxes colors icons
 
@@ -48,7 +48,7 @@ wait_access() {
 
     # Add mailboxes to monitor
     for mailbox in "${mailboxes[@]}"; do
-        set -- "${@}" "${mailbase}/${mailbox}"/.notmuch/xapian
+        set -- "${@}" "${mail_base}/${mailbox}"/.notmuch/xapian
     done
 
     # Add fetching process to monitor

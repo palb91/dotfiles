@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set_alarm() {
     level="${1}"
@@ -37,7 +37,7 @@ icon=
 [ -d "${bat}" ] || { printf '<span color="#FF0000">×</span>\n'; exit 0; }
 
 # Full battery, display nothing
-[ "${capacity}" -gt 95 ] && { printf '\n'; } #exit 0; }
+[ "${level}" -gt 95 ] && { printf '\n'; exit 0; }
 
 # Else display capacity
 if [ "${state}" = 'Charging' ]; then
@@ -57,4 +57,4 @@ fi
 # Output an alert on low capacity
 set_alarm "${level}"
 
-printf '%s %s%\n' "${icon}" "${level}"
+printf '%s %s\n' "${icon}" "${level}%"

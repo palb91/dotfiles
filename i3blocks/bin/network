@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 icon=
 ipath=/sys/class/net/"${1:-enp0s31f6}"
