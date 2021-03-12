@@ -11,7 +11,7 @@ scan() {
 
     # Get scontrol name automatically (First in the list)
     card_id="${card#*card}"
-    scontrol="$(amixer -c "${card_id}" scontrols)"
+    scontrol="$(amixer -c "${card_id}" scontrols 2>/dev/null)"
     scontrol="${scontrol#*\'}"
     scontrol="${scontrol%%\'*}"
 
