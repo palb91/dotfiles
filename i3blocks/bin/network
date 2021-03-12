@@ -11,9 +11,13 @@ ip=
 # Get IP address
 if [ -L "${ipath}" ]; then
     [ "$(<"${istate}")" = 'up' ] && {
-        ip="$(ip addr show "${1}")"
-        ip="${ip#*inet }"
-        ip="${ip%%/*}"
+        ip_output="$(ip addr show "${1}")"
+
+        if [[ "${ip_output}" == *'inet '* ]]; then
+            ip="${ip_output#*inet }"
+            ip="${ip%%/*}"
+            ip="${ip:*:15}"
+        fi
     }
 fi
 

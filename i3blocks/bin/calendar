@@ -31,4 +31,4 @@ first_event="${first_event%%$'\n'*}"            # Remove all but first line
 
 [ "${#first_event}" -gt 30 ] && first_event="${first_event:0:26}…"
 
-printf '<span color="%s"> %s\n' "${color}" "${first_event}"
+printf '<span color="%s"> %s \n' "${color}" "${first_event}"
