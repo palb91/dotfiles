@@ -1,0 +1,30 @@
+#!/bin/sh
+
+db=newsboat/cache.db
+unread_query='SELECT count(*) FROM rss_item WHERE unread = 1;'
+
+
+display() {
+    count="$(sqlite3 "${XDG_DATA_HOME}/${db}" "${unread_query}" )"
+    color='#333333'
+    text=
+
+    [ "${count}" -gt 0 ]   \
+        && color='#FFFFFF' \
+        && text=' <span color="#FF7700">'"${count}"'</span>'
+
+    printf '<span color="%s"></span>%s\n' "${color}" "${text}"
+}
+
+
+wait_access() {
+    # Filter inotify event types
+    set -- -qqre modify,create,delete
+    inotifywait "${@}" "${XDG_DATA_HOME}" --include "${db}"
+}
+
+# Run continuously
+display
+while wait_access; do
+    display
+done

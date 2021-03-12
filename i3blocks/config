@@ -25,6 +25,11 @@ command=bin/mails
 interval=persist
 
 
+[rss]
+command=bin/rss
+interval=persist
+
+
 [sound_laptop]
 command=bin/volume
 interval=persist
