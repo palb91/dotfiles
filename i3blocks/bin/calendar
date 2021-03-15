@@ -1,34 +1,33 @@
 #!/bin/bash
 
+# Env
+format='<b>{start-time}</b></span> {title}'     # Default time format
+color='#FF0000'                                 # Default color: urgent red
+
+
 # Set options
-set --        --no-color                                # Disable ansi colors
-set -- "${@}" list                                      # Print next events
-set -- "${@}" -a work                                   # Select work calendar
-set -- "${@}" --format '{start-time}</span> {title}'    # ex: 14:00 some event
-set -- "${@}" --notstarted                              # Remove started events
-set -- "${@}" now                                       # Start and delta
+set --        --no-color                        # Disable ansi colors
+set -- "${@}" list -a work                      # Print next calendar events
+set -- "${@}" --format "${format}"              # Set format
+set -- "${@}" now                               # From now to...
 
-# Get next event
-short_events="$(khal "${@}" 10min )"                    # Get urgent event
 
-if [ "${short_events}" != 'No events' ]; then
-    next_events="${short_events}"
-    color='#FF0000'
+readarray -s 1 events < <(khal "${@}" 15min)    # Get urgent events
 
-else                                                    # Or find next non
-    next_events="$(khal "${@}" 23:59)"                  # urgent event
-    color='#FFFFFF'
 
+if [ "${#events[@]}" -eq 0 ]; then              # No urgent...
+    readarray -s1 events < <(khal "${@}" eod)   # ...get normal events
+    color='#FFFFFF'                             # Set non-urgent color
 fi
 
-# Quit if no event
-[ "${next_events}" = "No events" ] && printf '\n' && exit 0
+
+for event in "${events[@]}"; do
+    [[ "${event}" =~ '</span>'* ]] || break     # Take first non-daily event
+done
 
 
-# Else get first event
-first_event="${next_events#*$'\n'}"             # Remove first line (header)
-first_event="${first_event%%$'\n'*}"            # Remove all but first line
+[ -z "${event}" ] && printf '\n' && exit 0      # Handle empty event
 
-[ "${#first_event}" -gt 30 ] && first_event="${first_event:0:26}…"
 
-printf '<span color="%s"> %s \n' "${color}" "${first_event}"
+# Else print the event
+printf '<span color="%s"> %s \n' "${color}" "${event}"
