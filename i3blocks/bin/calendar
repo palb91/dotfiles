@@ -20,14 +20,12 @@ if [ "${#events[@]}" -eq 0 ]; then              # No urgent...
     color='#FFFFFF'                             # Set non-urgent color
 fi
 
-
 for event in "${events[@]}"; do
-    [[ "${event}" =~ '</span>'* ]] || break     # Take first non-daily event
+    [[ "${event}" = '<b></b>'* ]] && continue  # Remove daily events
+
+    # Print first non-empty event and exit
+    printf '<span color="%s"> %s \n' "${color}" "${event}"
+    break
 done
 
-
-[ -z "${event}" ] && printf '\n' && exit 0      # Handle empty event
-
-
-# Else print the event
-printf '<span color="%s"> %s \n' "${color}" "${event}"
+exit 0
