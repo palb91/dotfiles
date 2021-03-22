@@ -11,7 +11,8 @@ zstyle ':completion:*'                  menu select
 
 # Visual menu
 [[ -n "${LS_COLORS}" ]] \
-  && zstyle ':completion:*:default'     list-colors ${(s.:.)LS_COLORS}
+  && zstyle ':completion:*:default'     list-colors "${(s.:.)LS_COLORS[@]}" \
+                                                    'ma=01;07;33'
 
 # Case insensitive, partial completion
 zstyle ':completion:*'                  matcher-list 'm:{a-z}={A-Z}'
@@ -27,7 +28,7 @@ zstyle ':completion:*:options'          auto-description '%d'
 zstyle ':completion:*:messages'         format '%d'
 zstyle ':completion:*:corrections'      format $'%{%}%d (errors: %e)'
 zstyle ':completion:*:descriptions'     format $'%F{3}completing %B%d%b%f'
-zstyle ':completion:*:warnings'         format $'%F{1}No matches for: %f%d'
+zstyle ':completion:*:warnings'         format $'%F{1}No matches for:%f %d'
 
 # Group entryies
 zstyle ':completion:*:expand:*'         tag-order all-expansions
