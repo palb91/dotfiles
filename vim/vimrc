@@ -51,7 +51,8 @@ set fillchars=vert:│,fold:─           " Split characters
 set noshowmode                        " Don't show current mode
 set laststatus=2                      " Show statusline
 
-set completeopt=menuone               " Completion options
+set completeopt=menuone,noselect      " Completion options
+set shortmess+=c                      " Shut off completion messages
 
 set wildmenu                          " Enable completion menu
 set wildcharm=<Tab>                   " Use <Tab> in macro and remaps
