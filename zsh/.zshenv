@@ -10,14 +10,20 @@ export XDG_CURRENT_DESKTOP=sway
 
 
 # Sockets
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}"/gnupg/S.gpg-agent.ssh
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 export TMUX_TMPDIR="${XDG_RUNTIME_DIR}/tmux"
 
 
 # Tools variables
+export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
 export GPG_TTY="${GPG_TTY:-$(tty)}"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}/password-store"
-export VIMINIT=":source ${XDG_CONFIG_HOME}/vim/vimrc"
+
+
+# Programming languages / packages
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export GOPATH="${XDG_DATA_HOME}/go"
 
 
 # export to systemd
